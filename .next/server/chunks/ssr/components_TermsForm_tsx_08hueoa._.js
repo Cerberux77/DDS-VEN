@@ -1,3 +1,0 @@
-module.exports=[18303,a=>{"use strict";var b=a.i(87924),c=a.i(72131);a.s(["TermsForm",0,function(){let[a,d]=(0,c.useState)(!1);async function e(){d(!0),(await fetch("/api/terms/accept",{method:"POST"})).ok?location.assign("/deal-room"):d(!1)}return(0,b.jsx)("button",{onClick:e,disabled:a,children:a?"Registrando aceptación…":"Acepto y continuar"})}])}];
-
-//# sourceMappingURL=components_TermsForm_tsx_08hueoa._.js.map
