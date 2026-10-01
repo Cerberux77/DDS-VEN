@@ -34,7 +34,11 @@ Example invite hash (do not use a real token on the command line in shared logs)
 
 The application repository is `Cerberux77/DDS-VEN`. Oreshnik remains the governance/control-plane layer through task `S-SM-DDS-DEALROOM-01` and issue `Cerberux77/oreshnik#232`; application source must not be copied into the Oreshnik repository. Governed changes are developed on a task branch, validated through the task gates, reviewed through a PR in `DDS-VEN`, and only then integrated/deployed.
 
-Current governed branch: `run/dds-dr-nav-preview-01`.
+Current governed branch: `run/dds-vercel-link-trigger-01`.
+
+## Deployment
+
+The Vercel project `dds-venezuela-portal` is connected to `Cerberux77/DDS-VEN`. Production deployments are expected from the `main` branch after the Git integration is connected. This repository-level metadata update is intentionally harmless and may be used to trigger the first deployment after linking the repository.
 
 ## Access notifications
 
