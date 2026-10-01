@@ -1,99 +1,95 @@
 import { NextResponse } from "next/server";
-import { randomUUID } from "node:crypto";
 import { sql } from "@/lib/db";
-import { signSession } from "@/lib/crypto";
-import { verifyLegacyPassword } from "@/lib/password";
-import { SESSION_COOKIE } from "@/lib/session";
+import { hashPassword } from "@/lib/password";
 import { audit } from "@/lib/audit";
 import { notifyAccess } from "@/lib/notify";
+import { ensureViewerAccess } from "@/lib/user-access";
 
 const cleanEmail = (v: unknown) => String(v ?? "").trim().toLowerCase();
+const cleanPhone = (v: unknown) => String(v ?? "").replace(/[^+0-9]/g, "").slice(0, 24);
 
-type LoginUser = {
+type ExistingUser = {
   id: string;
   email: string;
   phone: string;
-  password_hash: string | null;
-  password_expires_at: string | null;
 };
 
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as
-    | { email?: string; password?: string }
+    | { email?: string; phone?: string; password?: string; confirmPassword?: string }
     | null;
 
   const email = cleanEmail(body?.email);
+  const phone = cleanPhone(body?.phone);
   const password = String(body?.password ?? "");
+  const confirmPassword = String(body?.confirmPassword ?? "");
 
-  if (!email.includes("@") || password.length < 1) {
-    return NextResponse.json({ error: "Datos de acceso inválidos" }, { status: 400 });
+  if (!email.includes("@") || phone.length < 7) {
+    return NextResponse.json({ error: "Correo o teléfono inválidos" }, { status: 400 });
+  }
+  if (password.length < 8) {
+    return NextResponse.json({ error: "La contraseña debe tener al menos 8 caracteres" }, { status: 400 });
+  }
+  if (password !== confirmPassword) {
+    return NextResponse.json({ error: "Las contraseñas no coinciden" }, { status: 400 });
   }
 
   const db = sql();
-  const rows = (await db`
-    select
-      id::text,
-      email,
-      phone,
-      password_hash,
-      password_expires_at::text
+  const existingRows = (await db`
+    select id::text, email, phone
     from users
     where lower(email) = ${email}
-      and active = true
     limit 1
-  `) as unknown as LoginUser[];
+  `) as unknown as ExistingUser[];
 
-  const user = rows[0];
-  if (!user?.password_hash || !verifyLegacyPassword(password, user.password_hash)) {
-    return NextResponse.json({ error: "Email o contraseña incorrectos" }, { status: 403 });
+  let userId: string;
+  let mode: "created" | "renewed";
+
+  const existing = existingRows[0];
+  if (existing) {
+    if (cleanPhone(existing.phone) !== phone) {
+      return NextResponse.json(
+        { error: "El correo ya está registrado con otro teléfono" },
+        { status: 409 },
+      );
+    }
+
+    const passwordHash = hashPassword(password);
+    const updated = (await db`
+      update users
+      set password_hash = ${passwordHash},
+          password_expires_at = now() + interval '72 hours',
+          active = true,
+          updated_at = now()
+      where id = ${existing.id}::uuid
+      returning id::text
+    `) as unknown as Array<{ id: string }>;
+    userId = updated[0].id;
+    mode = "renewed";
+  } else {
+    const passwordHash = hashPassword(password);
+    const created = (await db`
+      insert into users(email, phone, password_hash, password_expires_at, active)
+      values(${email}, ${phone}, ${passwordHash}, now() + interval '72 hours', true)
+      returning id::text
+    `) as unknown as Array<{ id: string }>;
+    userId = created[0].id;
+    mode = "created";
   }
 
-  if (!user.password_expires_at || new Date(user.password_expires_at).getTime() <= Date.now()) {
-    return NextResponse.json(
-      { error: "Contraseña expirada. Solicite una nueva ventana de acceso." },
-      { status: 403 },
-    );
-  }
-
-  await db`
-    insert into memberships(user_id, organization_id, role)
-    select ${user.id}::uuid, id, 'VIEWER'
-    from organizations
-    where slug = 'smsmantis'
-    on conflict(user_id) do nothing
-  `;
-
-  const sessionId = randomUUID();
-  await db`
-    insert into access_sessions(id, user_id, expires_at)
-    values(
-      ${sessionId}::uuid,
-      ${user.id}::uuid,
-      least(${user.password_expires_at}::timestamptz, now() + interval '72 hours')
-    )
-  `;
-
-  const response = NextResponse.json({ ok: true });
-  response.cookies.set(SESSION_COOKIE, signSession(sessionId, user.id), {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path: "/",
-    maxAge: 60 * 60 * 72,
-  });
+  await ensureViewerAccess(userId);
 
   await audit({
-    sessionId,
-    userId: user.id,
-    event: "LOGIN",
-    metadata: { email, auth: "password" },
-  });
-  await notifyAccess({
-    type: "LOGIN",
-    email: user.email,
-    phone: user.phone,
-    sessionId,
+    userId,
+    event: "REGISTER",
+    metadata: { email, mode },
   });
 
-  return response;
+  await notifyAccess({
+    type: "REGISTER",
+    email,
+    phone,
+  });
+
+  return NextResponse.json({ ok: true, mode });
 }
