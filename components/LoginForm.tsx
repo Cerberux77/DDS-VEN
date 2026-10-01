@@ -11,7 +11,7 @@ export function LoginForm() {
     setError("");
     const form = new FormData(e.currentTarget);
     const body = Object.fromEntries(form.entries());
-    const res = await fetch("/api/auth/register", {
+    const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),
@@ -35,9 +35,12 @@ export function LoginForm() {
         Contraseña
         <input name="password" type="password" required autoComplete="current-password" />
       </label>
-      <p className="meta">La contraseña vigente caduca 72 horas después de la activación de esta revisión.</p>
+      <p className="meta">La contraseña vigente caduca 72 horas después de su activación o renovación.</p>
       {error && <p className="error">{error}</p>}
-      <button disabled={busy}>{busy ? "Validando…" : "Entrar al Deal Room"}</button>
+      <div className="formActions">
+        <button disabled={busy}>{busy ? "Validando…" : "Entrar al Deal Room"}</button>
+        <a className="secondaryButton" href="/register">Registrarse</a>
+      </div>
     </form>
   );
 }
