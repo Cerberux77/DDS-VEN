@@ -1,0 +1,12 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { decideAccess } from "../lib/access-policy.ts";
+const base={authenticated:true,termsAccepted:true,grant:"PREVIEW" as const,documentState:"PREVIEW" as const,canDownload:false,revoked:false};
+test("anonymous is denied",()=>assert.equal(decideAccess({...base,authenticated:false},"VIEW_PREVIEW").allowed,false));
+test("terms are mandatory",()=>assert.equal(decideAccess({...base,termsAccepted:false},"VIEW_PREVIEW").reason,"TERMS_REQUIRED"));
+test("preview can view derived preview",()=>assert.equal(decideAccess(base,"VIEW_PREVIEW").allowed,true));
+test("preview cannot download source",()=>assert.equal(decideAccess(base,"DOWNLOAD_SOURCE").allowed,false));
+test("released still cannot download source",()=>assert.equal(decideAccess({...base,grant:"RELEASED",documentState:"RELEASED",canDownload:true},"DOWNLOAD_SOURCE").allowed,false));
+test("source released plus explicit download grant can download",()=>assert.equal(decideAccess({...base,grant:"SOURCE_RELEASED",documentState:"SOURCE_RELEASED",canDownload:true},"DOWNLOAD_SOURCE").allowed,true));
+test("document state caps broader user grant",()=>assert.equal(decideAccess({...base,grant:"SOURCE_RELEASED",documentState:"PREVIEW",canDownload:true},"DOWNLOAD_SOURCE").allowed,false));
+test("revocation wins",()=>assert.equal(decideAccess({...base,revoked:true},"VIEW_PREVIEW").allowed,false));

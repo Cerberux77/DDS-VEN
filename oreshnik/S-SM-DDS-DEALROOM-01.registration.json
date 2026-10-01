@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "taskId": "S-SM-DDS-DEALROOM-01",
+  "task": {
+    "id": "S-SM-DDS-DEALROOM-01",
+    "title": "DDS Venezuela controlled deal room with phased document release",
+    "owner": "manuel",
+    "backupOwner": "jean",
+    "status": "active",
+    "track": "S-SM-DDS-DEALROOM-01",
+    "zone": [
+      "app/**",
+      "components/**",
+      "lib/**",
+      "sql/**",
+      "tests/**",
+      "docs/**",
+      ".env.example",
+      "next.config.ts",
+      "package.json",
+      "tsconfig.json"
+    ],
+    "resources": [
+      "github:Cerberux77/DDS-VEN",
+      "vercel:dds-venezuela-portal",
+      "neon:dds-deal-room"
+    ],
+    "dependsOn": [],
+    "acceptance": [
+      "PREVIEW cannot retrieve source bytes through UI or direct preview endpoint",
+      "RELEASED and SOURCE_RELEASED are server-authorized and auditable",
+      "Controlled preview is watermarked per user/session and requires versioned terms acceptance",
+      "Document view provides back, breadcrumb, sidebar index, previous/next navigation and Included Materials",
+      "Phase 2 drilling outlook is labeled as market-intelligence estimate and separated from public rig-count reporting",
+      "Policy/source-boundary tests pass; typecheck and production build must pass in a dependency-complete environment"
+    ]
+  },
+  "goalMarkdown": "# S-SM-DDS-DEALROOM-01\n\nContinue the SMSMantis DDS Venezuela Controlled Deal Room in canonical application repository Cerberux77/DDS-VEN. Oreshnik is governance only. Preserve source confidentiality in PREVIEW, add navigable package UX and derived Included Materials, record market-intelligence estimates without presenting them as public certified rig count, and move through branch -> gates -> PR -> integration -> deployment evidence.",
+  "registeredBy": "manuel",
+  "registeredAt": "2026-10-01T04:31:59.000Z",
+  "canonicalRepository": "Cerberux77/DDS-VEN",
+  "governanceAnchor": "Cerberux77/oreshnik#232",
+  "activeBranch": "run/dds-dr-nav-preview-01"
+}
