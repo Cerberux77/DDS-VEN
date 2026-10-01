@@ -51,3 +51,5 @@ jobs:
           git add e2e-auth-notify-result.txt
           git commit -m "test: record JSON-safe production auth E2E result" || true
           git push
+
+# verify after production session-signing fix
