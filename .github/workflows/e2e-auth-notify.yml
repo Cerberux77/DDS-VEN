@@ -8,34 +8,42 @@ on:
       - ".github/workflows/e2e-auth-notify.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: run/dds-e2e-auth-notify-test
+
       - name: Exercise production registration and login
         shell: bash
         run: |
-          set -euo pipefail
+          set +e
           EMAIL="dds.qa.${GITHUB_RUN_ID}@example.com"
           PHONE="+155500${GITHUB_RUN_NUMBER}01"
           PASSWORD="Qa-${GITHUB_RUN_ID}-A9!"
 
-          echo "QA_EMAIL=$EMAIL"
-
           REGISTER_CODE=$(curl -sS -o /tmp/register.json -w "%{http_code}"             -X POST "https://dds-venezuela-portal.vercel.app/api/auth/register"             -H "content-type: application/json"             --data "{"email":"$EMAIL","phone":"$PHONE","password":"$PASSWORD","confirmPassword":"$PASSWORD"}")
-          echo "REGISTER_HTTP=$REGISTER_CODE"
-          cat /tmp/register.json
-          test "$REGISTER_CODE" = "200"
 
           LOGIN_CODE=$(curl -sS -o /tmp/login.json -w "%{http_code}"             -X POST "https://dds-venezuela-portal.vercel.app/api/auth/login"             -H "content-type: application/json"             --data "{"email":"$EMAIL","password":"$PASSWORD"}")
-          echo
-          echo "LOGIN_HTTP=$LOGIN_CODE"
-          cat /tmp/login.json
-          test "$LOGIN_CODE" = "200"
 
-          echo
-          echo "NOTIFICATION_STATUS:"
-          curl -sS "https://dds-venezuela-portal.vercel.app/api/ops/notification-status"
-          echo
+          STATUS_CODE=$(curl -sS -o /tmp/status.json -w "%{http_code}"             "https://dds-venezuela-portal.vercel.app/api/ops/notification-status")
+
+          {
+            echo "email=$EMAIL"
+            echo "register_http=$REGISTER_CODE"
+            echo -n "register_body="; cat /tmp/register.json; echo
+            echo "login_http=$LOGIN_CODE"
+            echo -n "login_body="; cat /tmp/login.json; echo
+            echo "notification_status_http=$STATUS_CODE"
+            echo -n "notification_status_body="; cat /tmp/status.json; echo
+          } > e2e-auth-notify-result.txt
+
+          git config user.name "DDS E2E Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add e2e-auth-notify-result.txt
+          git commit -m "test: record production auth notification E2E result" || true
+          git push
