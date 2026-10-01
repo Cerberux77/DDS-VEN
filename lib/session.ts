@@ -17,8 +17,9 @@ export type SessionContext = {
 
 export async function getSessionContext(): Promise<SessionContext | null> {
   const jar = await cookies();
-  const token = verifySessionCookie(jar.get(SESSION_COOKIE)?.value);
+  const token = await verifySessionCookie(jar.get(SESSION_COOKIE)?.value);
   if (!token) return null;
+
   const db = sql();
   const rows = await db`
     select s.id::text as session_id, u.id::text as user_id, u.email, u.phone, m.role,
@@ -37,15 +38,17 @@ export async function getSessionContext(): Promise<SessionContext | null> {
       and u.active = true
     limit 1
   ` as unknown as Array<Record<string, unknown>>;
+
   const row = rows[0];
   if (!row) return null;
+
   return {
     sessionId: String(row.session_id),
     userId: String(row.user_id),
     email: String(row.email),
     phone: String(row.phone),
     role: row.role === "ADMIN" ? "ADMIN" : "VIEWER",
-    termsAccepted: Boolean(row.terms_accepted)
+    termsAccepted: Boolean(row.terms_accepted),
   };
 }
 
