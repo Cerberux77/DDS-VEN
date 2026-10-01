@@ -2,6 +2,7 @@ import "server-only";
 import { sql } from "@/lib/db";
 
 export type AuditEvent =
+  | "REGISTER"
   | "LOGIN"
   | "LOGOUT"
   | "TERMS_ACCEPTED"
