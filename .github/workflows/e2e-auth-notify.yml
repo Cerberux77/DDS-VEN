@@ -1,0 +1,41 @@
+name: DDS production auth notification E2E
+
+on:
+  push:
+    branches:
+      - run/dds-e2e-auth-notify-test
+    paths:
+      - ".github/workflows/e2e-auth-notify.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exercise production registration and login
+        shell: bash
+        run: |
+          set -euo pipefail
+          EMAIL="dds.qa.${GITHUB_RUN_ID}@example.com"
+          PHONE="+155500${GITHUB_RUN_NUMBER}01"
+          PASSWORD="Qa-${GITHUB_RUN_ID}-A9!"
+
+          echo "QA_EMAIL=$EMAIL"
+
+          REGISTER_CODE=$(curl -sS -o /tmp/register.json -w "%{http_code}"             -X POST "https://dds-venezuela-portal.vercel.app/api/auth/register"             -H "content-type: application/json"             --data "{"email":"$EMAIL","phone":"$PHONE","password":"$PASSWORD","confirmPassword":"$PASSWORD"}")
+          echo "REGISTER_HTTP=$REGISTER_CODE"
+          cat /tmp/register.json
+          test "$REGISTER_CODE" = "200"
+
+          LOGIN_CODE=$(curl -sS -o /tmp/login.json -w "%{http_code}"             -X POST "https://dds-venezuela-portal.vercel.app/api/auth/login"             -H "content-type: application/json"             --data "{"email":"$EMAIL","password":"$PASSWORD"}")
+          echo
+          echo "LOGIN_HTTP=$LOGIN_CODE"
+          cat /tmp/login.json
+          test "$LOGIN_CODE" = "200"
+
+          echo
+          echo "NOTIFICATION_STATUS:"
+          curl -sS "https://dds-venezuela-portal.vercel.app/api/ops/notification-status"
+          echo
