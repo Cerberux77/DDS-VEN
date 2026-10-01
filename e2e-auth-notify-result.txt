@@ -1,7 +1,7 @@
-email=dds.qa.36858711047@example.com
+email=dds.qa.36859293853@example.com
 register_http=200
 register_body={"ok":true,"mode":"created"}
-login_http=500
-login_body=
+login_http=200
+login_body={"ok":true}
 notification_status_http=200
 notification_status_body={"ok":true,"configured":false,"channels":{"webhook":false,"email":false}}
