@@ -1,0 +1,7 @@
+import { NextResponse } from "next/server";
+import { getSessionContext } from "@/lib/session";
+import { authorize, getDocument } from "@/lib/documents";
+import { audit } from "@/lib/audit";
+import { readSource } from "@/lib/content-store";
+import { notifyAccess } from "@/lib/notify";
+export async function GET(_req:Request,{params}:{params:Promise<{id:string}>}){const {id}=await params;const s=await getSessionContext();if(!s)return NextResponse.json({error:"Unauthorized"},{status:401});const d=await getDocument(s,id);if(!d)return NextResponse.json({error:"Not found"},{status:404});const decision=authorize(s,d,"DOWNLOAD_SOURCE");if(!decision.allowed||!d.sourceStorageKey){await audit({sessionId:s.sessionId,userId:s.userId,documentId:id,event:"DOWNLOAD_DENIED",reason:decision.reason});await notifyAccess({type:"DOWNLOAD_DENIED",email:s.email,documentId:id,sessionId:s.sessionId});return NextResponse.json({error:"Source not released"},{status:403});}const upstream=await readSource(d.sourceStorageKey);await audit({sessionId:s.sessionId,userId:s.userId,documentId:id,event:"DOWNLOAD_GRANTED",reason:decision.reason});await notifyAccess({type:"DOWNLOAD_GRANTED",email:s.email,documentId:id,sessionId:s.sessionId});const headers=new Headers(upstream.headers);headers.set("Cache-Control","private, no-store, max-age=0");headers.set("Content-Disposition",`attachment; filename="${d.slug.replace(/[^a-z0-9_-]/gi,"_")}"`);headers.set("X-Content-Type-Options","nosniff");return new Response(upstream.body,{status:upstream.status,headers});}
