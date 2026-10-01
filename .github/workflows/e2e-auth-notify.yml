@@ -23,8 +23,8 @@ jobs:
         run: |
           set +e
           EMAIL="dds.qa.${GITHUB_RUN_ID}@example.com"
-          PHONE="+155500${GITHUB_RUN_NUMBER}01"
-          PASSWORD="Qa-${GITHUB_RUN_ID}-A9!"
+          PHONE="15550000000"
+          PASSWORD="$(openssl rand -hex 16)"
 
           REGISTER_CODE=$(curl -sS -o /tmp/register.json -w "%{http_code}"             -X POST "https://dds-venezuela-portal.vercel.app/api/auth/register"             -H "content-type: application/json"             --data "{"email":"$EMAIL","phone":"$PHONE","password":"$PASSWORD","confirmPassword":"$PASSWORD"}")
 
@@ -45,5 +45,5 @@ jobs:
           git config user.name "DDS E2E Bot"
           git config user.email "actions@users.noreply.github.com"
           git add e2e-auth-notify-result.txt
-          git commit -m "test: record production auth notification E2E result" || true
+          git commit -m "test: record valid production auth E2E result" || true
           git push
