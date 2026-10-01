@@ -1,4 +1,4 @@
-email=dds.qa.36858490864@example.com
+email=dds.qa.36858640448@example.com
 register_http=400
 register_body={"error":"Correo o teléfono inválidos"}
 login_http=400
