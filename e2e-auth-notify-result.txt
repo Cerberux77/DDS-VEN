@@ -1,7 +1,7 @@
-email=dds.qa.36858640448@example.com
-register_http=400
-register_body={"error":"Correo o teléfono inválidos"}
-login_http=400
-login_body={"error":"Datos de acceso inválidos"}
+email=dds.qa.36858711047@example.com
+register_http=200
+register_body={"ok":true,"mode":"created"}
+login_http=500
+login_body=
 notification_status_http=200
 notification_status_body={"ok":true,"configured":false,"channels":{"webhook":false,"email":false}}
