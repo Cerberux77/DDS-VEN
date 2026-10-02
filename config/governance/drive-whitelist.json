@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "rootDriveFolderId": "19zkHitGjxFPMypQCkTk4JultUlDiT3No",
+  "records": [
+    {
+      "driveFileId": "1XJnE5PLEW8jAdJejq2K3UaGZVV59TDjh6ZAJX82rEzo",
+      "canonicalPath": "/00_INDICE_MAESTRO_PROYECTO_DDS_2026",
+      "version": "observed-2026-10-01",
+      "modifiedTime": "2026-10-01T05:29:11.790Z",
+      "hash": null,
+      "documentType": "MASTER_INDEX",
+      "status": "CURRENT",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": "DDS_PHASE_2"
+    },
+    {
+      "driveFileId": "1fIxd_817m3KMGE892IQd4lqg-hQodsme",
+      "canonicalPath": "/05_Modelo_Financiero_y_Reuniones_Fase_2/DDS_Modelo_AC_BLIND.xlsx",
+      "version": "baseline-observed-2026-10-01",
+      "modifiedTime": "2026-10-01T08:53:40.185Z",
+      "hash": null,
+      "documentType": "FINANCIAL_MODEL_XLSX",
+      "status": "CURRENT",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_FINANCIAL_MODEL_24M",
+      "relatedRelease": "DDS_PHASE_2"
+    },
+    {
+      "driveFileId": "1DvzaNgcCziA349smoo3kOuoxRNtMZyd4",
+      "canonicalPath": "/05_Modelo_Financiero_y_Reuniones_Fase_2/BACKUP_S03_DDS_Modelo_AC_BLIND_2026-10-02_1034.xlsx",
+      "version": "backup-s03-2026-10-02-1034",
+      "modifiedTime": "2026-10-02T14:36:04.960Z",
+      "hash": null,
+      "documentType": "FINANCIAL_MODEL_BACKUP",
+      "status": "DRAFT",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_FINANCIAL_MODEL_24M",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1PmurY3JxTyJOLel4_iBko38fuTfA5vjT",
+      "canonicalPath": "/05_Modelo_Financiero_y_Reuniones_Fase_2/DDS_Venezuela_Modelo_Interactivo_24M.html",
+      "version": "observed-2026-09-27",
+      "modifiedTime": "2026-09-27T16:47:14.858Z",
+      "hash": null,
+      "documentType": "INTERACTIVE_MODEL_HTML_SOURCE",
+      "status": "CURRENT",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_FINANCIAL_MODEL_24M",
+      "relatedRelease": "DDS_PHASE_2"
+    },
+    {
+      "driveFileId": "1c9sjUG7a-SVo4ZYI3kPbZ3X6hZkx7Fsy",
+      "canonicalPath": "/SMSMantis/manual de identidad mantis/SMSMantis_Manual_Identidad_Grafito_Naranja_v1.0.pdf",
+      "version": "1.0",
+      "modifiedTime": "2026-09-22T03:06:51.446Z",
+      "hash": null,
+      "documentType": "BRAND_MANUAL",
+      "status": "CURRENT",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    }
+  ],
+  "notes": [
+    "Whitelist is intentionally narrow; folder membership alone does not authorize ingestion.",
+    "A null hash means the connected Drive surface did not expose a content checksum during this observed snapshot.",
+    "Original confidential/legal/commercial source files remain in Drive unless an explicit policy authorizes a normalized or derived Git artifact."
+  ]
+}
