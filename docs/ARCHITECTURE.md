@@ -21,3 +21,15 @@ A web app cannot guarantee screenshot prevention. The implemented control is att
 ## Current source model
 
 Drive baseline: `DDS_Venezuela_Modelo_Interactivo_24M.html`, last observed modified 2026-09-27. The source currently contains CSV export, scenario JSON save/import and print/PDF controls. Those capabilities are intentionally absent from PREVIEW.
+
+
+## Cross-system governance
+
+DDS-S06 adds a fail-closed governance layer without changing the browser security boundary described above. Drive originals are monitored through an explicit whitelist, Oreshnik records task/run/gate evidence, computational changes land in DDS-VEN through PRs, and sensitive outbound communication remains subject to a Manuel approval gate.
+
+See:
+
+- `docs/governance/ADR-0002-dds-governance-control-plane.md`
+- `docs/governance/OPERATING_MANUAL.md`
+- `config/governance/drive-whitelist.json`
+- `schemas/governance/`
