@@ -27,6 +27,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Governance configuration gate
+        run: npm run governance:check
+
       - name: Policy and source-boundary tests
         run: npm test
 
