@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "brand": "SMSMantis",
+  "source": {
+    "driveFileId": "1c9sjUG7a-SVo4ZYI3kPbZ3X6hZkx7Fsy",
+    "title": "SMSMantis_Manual_Identidad_Grafito_Naranja_v1.0.pdf",
+    "manualVersion": "1.0"
+  },
+  "color": {
+    "paper": { "hex": "#FAF6EF", "use": "soft backgrounds and investment blocks" },
+    "ink": { "hex": "#18212B", "use": "body text and headings" },
+    "graphite": { "hex": "#263442", "use": "bands, covers and dark surfaces" },
+    "orangeText": { "hex": "#B5470B", "use": "labels and short text on light backgrounds" },
+    "orangeEmphasis": { "hex": "#FF6600", "use": "lines and decorative emphasis; avoid small text" },
+    "white": { "hex": "#FFFFFF", "use": "neutral surface and logo-safe field" }
+  },
+  "typography": {
+    "headingFamily": "Montserrat",
+    "headingWeight": "700",
+    "bodyFamily": "Inter",
+    "bodyWeights": ["400", "500"],
+    "pageTitlePt": { "min": 23, "max": 28 },
+    "sectionHeadingPt": { "min": 12, "max": 16 },
+    "bodyPt": { "min": 11, "max": 12 },
+    "notePt": { "min": 9, "max": 10 }
+  },
+  "documentLayout": {
+    "a4MarginMm": { "min": 19, "max": 20 },
+    "sectionGapPt": { "min": 16, "max": 24 },
+    "dominantColumns": 1,
+    "reserveHeaderAndFolio": true
+  },
+  "logo": {
+    "preferredSmallUse": "Flat",
+    "preferredLargeUse": "Master",
+    "canvasPx": [512, 512],
+    "headerCanvasPt": 52,
+    "additionalClearanceMm": 3,
+    "rules": [
+      "preserve original aspect ratio",
+      "do not recolor",
+      "do not add effects",
+      "do not crop original canvas",
+      "prefer white or paper backgrounds",
+      "on graphite use a white logo field"
+    ]
+  },
+  "voice": {
+    "language": "es",
+    "attributes": ["direct", "professional", "concrete"],
+    "rules": [
+      "one idea per paragraph",
+      "prefer short sentences and active verbs",
+      "explain technical terms on first use when needed",
+      "avoid unsupported guarantees",
+      "avoid unexplained acronyms",
+      "avoid grandiose claims"
+    ]
+  },
+  "quality": {
+    "bodyContrastMinimum": 7,
+    "shortTextContrastMinimum": 4.5,
+    "preserveApprovedCommitments": true,
+    "requireSelectableText": true,
+    "requireNoOverlapOrClipping": true,
+    "internalEvaluationTarget": 90
+  }
+}
