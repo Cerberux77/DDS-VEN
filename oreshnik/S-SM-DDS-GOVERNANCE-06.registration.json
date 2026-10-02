@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "taskId": "S-SM-DDS-GOVERNANCE-06",
+  "task": {
+    "id": "S-SM-DDS-GOVERNANCE-06",
+    "title": "DDS Venezuela Drive/GitHub/Oreshnik/Gmail governance",
+    "owner": "manuel",
+    "backupOwner": "jean",
+    "status": "active",
+    "track": "DDS-S06",
+    "zone": [
+      "config/governance/**",
+      "config/brand/**",
+      "data/governance/**",
+      "docs/governance/**",
+      "lib/governance/**",
+      "schemas/governance/**",
+      "tests/governance-policy.test.ts",
+      "oreshnik/S-SM-DDS-GOVERNANCE-06.registration.json"
+    ],
+    "resources": [
+      "github:Cerberux77/DDS-VEN",
+      "github:Cerberux77/oreshnik#233",
+      "drive:19zkHitGjxFPMypQCkTk4JultUlDiT3No",
+      "drive:1fIxd_817m3KMGE892IQd4lqg-hQodsme",
+      "drive:1c9sjUG7a-SVo4ZYI3kPbZ3X6hZkx7Fsy"
+    ],
+    "dependsOn": [
+      "DDS-S01",
+      "DDS-S02",
+      "DDS-S03",
+      "DDS-S04",
+      "DDS-S05"
+    ],
+    "acceptance": [
+      "Unlisted Drive files cannot silently replace a baseline",
+      "DRAFT, SUPERSEDED and ARCHIVE cannot replace CURRENT",
+      "Model-affecting changes require tests and financial reconciliation",
+      "Sensitive outbound Gmail sends require explicit Manuel approval",
+      "Original legal/confidential documents are not bulk-copied into Git",
+      "Mantis identity is consumed as reusable tokens rather than whole-manual injection",
+      "Pilot evidence proves the 2026-10-02 S03 backup is detected without baseline promotion",
+      "CI must pass before integration"
+    ]
+  },
+  "goalMarkdown": "# DDS-S06\n\nImplement a fail-closed governance layer across Drive, DDS-VEN, Oreshnik, the deal room and Gmail while preserving Manuel as the approval authority for material baseline changes and sensitive outbound communications.",
+  "registeredBy": "manuel",
+  "registeredAt": "2026-10-02T14:40:16Z",
+  "canonicalRepository": "Cerberux77/DDS-VEN",
+  "governanceAnchor": "Cerberux77/oreshnik#233",
+  "activeBranch": "run/dds-s06-governance-01"
+}
