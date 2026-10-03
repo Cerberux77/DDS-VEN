@@ -143,6 +143,38 @@ export function FleetConfigurator({ initialScenario }: { initialScenario: FleetS
           </label>
         </div>
 
+        <div className="sectionLengthControls" aria-label="Pozo tipo editable">
+          <label>
+            <span>Intermediate 12¼ — ft</span>
+            <input
+              type="range"
+              min={1200}
+              max={5500}
+              step={100}
+              value={selection.intermediateFt ?? 1800}
+              onChange={(e) => update("intermediateFt", Number(e.target.value))}
+            />
+            <strong>{(selection.intermediateFt ?? 1800).toLocaleString()} ft</strong>
+          </label>
+          <label>
+            <span>Production / Lateral 8½ — ft</span>
+            <input
+              type="range"
+              min={3000}
+              max={6500}
+              step={100}
+              value={selection.lateralFt ?? 4400}
+              onChange={(e) => update("lateralFt", Number(e.target.value))}
+            />
+            <strong>{(selection.lateralFt ?? 4400).toLocaleString()} ft</strong>
+          </label>
+          <div className="selectorReadOnly">
+            <span>Revenue bridge</span>
+            <strong>{money(scenario.economics.bridgeRevenuePerWell ?? null)} / well</strong>
+            <small>M4–M6 · 12¼ without resistivity</small>
+          </div>
+        </div>
+
         <details className="advancedSelectors">
           <summary>Customs / Surety / Optional controls</summary>
           <div className="selectorAdvancedGrid">
@@ -197,9 +229,9 @@ export function FleetConfigurator({ initialScenario }: { initialScenario: FleetS
               </label>
             )}
             <div className="selectorReadOnly">
-              <span>Austral Contribution</span>
-              <strong>USD 0 confirmed</strong>
-              <small>asset-level · current evidence</small>
+              <span>Austral / Ewert Contribution</span>
+              <strong>{money(scenario.economics.confirmedAustralContribution)}</strong>
+              <small>in-kind technical fleet · not purchase cash</small>
             </div>
           </div>
         </details>
@@ -240,10 +272,10 @@ export function FleetConfigurator({ initialScenario }: { initialScenario: FleetS
           )}
 
           <div className="headlineKpis">
-            <Metric label="Equipment CAPEX" value={scenario.economics.equipmentCapex} note={scenario.economics.sourceStatus} />
-            <Metric label="Pre-op / Startup Cash" value={scenario.economics.preopCash} note="scenario cash before operations" />
-            <Metric label="Gross Peak Funding" value={scenario.economics.grossPeakFunding} note="NOT required equity" />
-            <Metric label="Target Funding Capacity" value={scenario.economics.targetFundingCapacity} note="peak + liquidity floor" />
+            <Metric label="3F Economic Asset Value" value={scenario.economics.equipmentCapex} note={scenario.economics.sourceStatus} />
+            <Metric label="Panthers Cash Before WC" value={scenario.economics.purchaseStartupP50} note="cash uses before operating working capital" />
+            <Metric label="Peak Liquid Funding" value={scenario.economics.targetFundingCapacity} note="cash capacity incl. liquidity floor" />
+            <Metric label="Austral In-Kind" value={scenario.economics.confirmedAustralContribution} note="partner asset contribution" />
             <Metric label="Peak AR" value={scenario.economics.peakAR} note={"DSO " + selection.dso} />
             <Metric label="24M EBITDA" value={scenario.economics.ebitda24M} note="selected scenario only" />
             <Metric label="24M Net Income" value={scenario.economics.netIncome24M} note="selected scenario only" />
@@ -253,14 +285,14 @@ export function FleetConfigurator({ initialScenario }: { initialScenario: FleetS
           <article className="benchmarkCard">
             <div>
               <div className="eyebrow">SUPPLIER-BACKED ANCHOR</div>
-              <h3>2F STARTUP — EWERT AFE REV0</h3>
-              <p>This benchmark remains visible even when the internal S04 default is Ramp 3→10. Presentation emphasis does not change the engine default.</p>
+              <h3>3F-CAPABLE STARTUP — EWERT 3 JOBS AFE REV0</h3>
+              <p>Supplier-backed 3F-capable asset pool with 2 revenue fronts at startup. PR2 6¾ is contributed by Ewert/Austral; PR2 8¼ is Panthers-funded on a 50% M0 / 50% M6 schedule.</p>
             </div>
             <div className="benchmarkNumbers">
-              <div><span>Equipment AFE</span><strong>{money(scenario.benchmark2F.equipmentCapex)}</strong></div>
-              <div><span>Purchase Startup P50</span><strong>{money(scenario.benchmark2F.purchaseStartupP50)}</strong></div>
-              <div><span>Pre-op Cash</span><strong>{money(scenario.benchmark2F.preopCash)}</strong></div>
-              <div><span>Gross Peak · DSO {selection.dso}</span><strong>{money(scenario.benchmark2F.grossPeakFunding)}</strong></div>
+              <div><span>Economic Asset Value</span><strong>{money(scenario.benchmark2F.equipmentCapex)}</strong></div>
+              <div><span>Panthers Cash Before WC</span><strong>{money(scenario.benchmark2F.purchaseStartupP50)}</strong></div>
+              <div><span>Bridge Revenue / Well</span><strong>{money(scenario.benchmark2F.bridgeRevenuePerWell ?? null)}</strong></div>
+              <div><span>Peak Liquid · DSO {selection.dso}</span><strong>{money(scenario.benchmark2F.targetFundingCapacity)}</strong></div>
             </div>
             <span className="sourceBadge sourceAfe">AFE BACKED</span>
           </article>
@@ -418,12 +450,10 @@ export function FleetConfigurator({ initialScenario }: { initialScenario: FleetS
             <Metric label="Target Funding Capacity" value={scenario.economics.targetFundingCapacity} note="S04 output" />
           </div>
 
-          <div className="grossNetBridge">
-            <div><span>Gross Peak Funding</span><strong>{money(scenario.economics.grossPeakFunding)}</strong></div>
-            <div className="bridgeOperator">−</div>
-            <div><span>Confirmed Austral Asset Contribution</span><strong>{money(scenario.economics.confirmedAustralContribution)}</strong><small>0 confirmed by current evidence</small></div>
-            <div className="bridgeOperator">=</div>
-            <div><span>Net Peak Funding</span><strong>{money(scenario.economics.netPeakFunding)}</strong><small>not required equity</small></div>
+          <div className="partnerCapitalBridge">
+            <div><span>Austral / Ewert In-Kind</span><strong>{money(scenario.economics.confirmedAustralContribution)}</strong><small>economic contribution · no Panthers purchase cash</small></div>
+            <div><span>Panthers Cash Before WC</span><strong>{money(scenario.economics.purchaseStartupP50)}</strong><small>PR2 8¼ + base + workshop + office/IT + vehicles + import + pre-op</small></div>
+            <div><span>Target Liquid Capacity</span><strong>{money(scenario.economics.targetFundingCapacity)}</strong><small>peak cash requirement including liquidity floor</small></div>
           </div>
 
           {scenario.fundingBridge.length > 0 ? (
@@ -440,7 +470,26 @@ export function FleetConfigurator({ initialScenario }: { initialScenario: FleetS
           ) : (
             <div className="emptyState">
               <strong>Detailed funding bridge not emitted for this selector combination.</strong>
-              <p>S05 does not reconstruct the S04 residual bridge. Peak Funding and other resolved headline outputs remain authoritative when available.</p>
+              <p>S05 does not reconstruct unresolved economics. Rev2 server outputs remain authoritative when available.</p>
+            </div>
+          )}
+
+          {scenario.cashRamp && scenario.cashRamp.length > 0 && (
+            <div className="cashRampPanel">
+              <div className="eyebrow">M0–M12 LIQUID CASH RAMP</div>
+              <div className="cashRampTable">
+                <div className="cashRampHeader"><span>Month</span><span>Fronts</span><span>Revenue</span><span>Collections</span><span>Cash Uses</span><span>Required Liquidity</span></div>
+                {scenario.cashRamp.map((row) => (
+                  <div className="cashRampRow" key={row.month}>
+                    <span>M{row.month}</span>
+                    <span>{row.activeFronts}</span>
+                    <strong>{money(row.revenue)}</strong>
+                    <strong>{money(row.netCollection)}</strong>
+                    <strong>{money(row.scheduledCash + row.operatingCashOut)}</strong>
+                    <strong>{money(row.liquidFundingRequired)}</strong>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </section>
