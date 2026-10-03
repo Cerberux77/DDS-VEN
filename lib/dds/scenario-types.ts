@@ -1,4 +1,4 @@
-export const FRONT_CONFIGURATION_OPTIONS = ["STATIC_2F", "STATIC_3F", "RAMP_3_TO_10"] as const;
+export const FRONT_CONFIGURATION_OPTIONS = ["STARTUP_3F_CAPABLE_2F_ACTIVE", "STARTUP_3F_CAPABLE_3F_M7", "STATIC_2F", "STATIC_3F", "RAMP_3_TO_10"] as const;
 export type FrontConfiguration = (typeof FRONT_CONFIGURATION_OPTIONS)[number];
 
 export const TECHNICAL_OPTIONS = ["EWERT_LEAN", "IDEAL", "OPTIMIZED"] as const;
@@ -40,6 +40,8 @@ export type ScenarioSelection = {
   hydrocarbonBenefit: HydrocarbonBenefit;
   optional475: Optional475;
   futureTechnicalFrontCount: number;
+  intermediateFt?: number;
+  lateralFt?: number;
 };
 
 export type EconomicStatus =
@@ -72,6 +74,9 @@ export type EconomicSnapshot = {
   suspendedTaxes: number | null;
   restrictedCash: number | null;
   optional475KnownCapex: number;
+  panthersCashBeforeWorkingCapital?: number | null;
+  bridgeRevenuePerWell?: number | null;
+  fullRevenuePerWell?: number | null;
   note: string;
 };
 
@@ -101,6 +106,7 @@ export type FleetAssetFamily = {
   temporaryAdmissionCandidate: boolean;
   leaseStatus: "PENDING_LEASING" | "N/A";
   notes: string[];
+  cashTreatment?: "AUSTRAL_IN_KIND" | "PANTHERS_CASH" | "OPTIONAL";
 };
 
 export type FrontFamilyCapacity = {
@@ -132,7 +138,7 @@ export type ConceptualBhaComponent = {
 };
 
 export type PhysicalView = {
-  mode: "EWERT_LEAN_2F" | "PROJECTED" | "CONCEPTUAL";
+  mode: "EWERT_LEAN_2F" | "EWERT_LEAN_3F" | "PROJECTED" | "CONCEPTUAL";
   sourceStatus: "AFE_BACKED" | "MODEL_DERIVED";
   fronts: FrontView[];
   pools: PoolView[];
@@ -151,7 +157,7 @@ export type PhysicalView = {
 export type ScenarioReconciliation = {
   computationalUiReconciliation: "PASS" | "PENDING";
   physicalSource: "S01_S02" | "CONCEPTUAL";
-  economicsSource: "S04_HANDOFF";
+  economicsSource: "S04_HANDOFF" | "S04_REV2_ENGINE";
   noIndependentEconomicFormula: true;
   noKitDoubleCount: boolean;
   lihBasis: "NBV";
@@ -159,6 +165,22 @@ export type ScenarioReconciliation = {
   grossFundingNotEquity: true;
   australCreditLabelSafe: true;
   note: string;
+};
+
+export type CashRampRow = {
+  month: number;
+  activeFronts: number;
+  wells: number;
+  revenue: number;
+  grossCollection: number;
+  netCollection: number;
+  accountsReceivable: number;
+  scheduledCash: number;
+  operatingCashOut: number;
+  netCashFlow: number;
+  cumulativeCash: number;
+  rawFundingRequired: number;
+  liquidFundingRequired: number;
 };
 
 export type FleetScenario = {
@@ -169,6 +191,7 @@ export type FleetScenario = {
   economics: EconomicSnapshot;
   physical: PhysicalView;
   fundingBridge: FundingBridgeItem[];
+  cashRamp?: CashRampRow[];
   assumptions: Array<{ label: string; value: string; status: string }>;
   reconciliation: ScenarioReconciliation;
   canonicalRefs: string[];
