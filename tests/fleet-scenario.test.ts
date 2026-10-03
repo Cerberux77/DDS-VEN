@@ -176,3 +176,12 @@ test("selected resolved scenarios report exact S04 handoff reconciliation", () =
     }
   }
 });
+
+
+test("UI uses Gross Peak Funding wording and never labels it Equity Required", () => {
+  const root = process.cwd();
+  const client = fs.readFileSync(path.join(root, "components/FleetConfigurator.tsx"), "utf8");
+  assert.equal(client.includes("Gross Peak Funding"), true);
+  assert.equal(client.includes("Equity Required"), false);
+  assert.equal(client.includes("not required equity"), true);
+});
