@@ -46,3 +46,18 @@ The current repository topology remains a single `Cerberux77/DDS-VEN` applicatio
 A newer supplier source never mutates S03/S04/S05 by recency alone. The 2026-10-03 3F Rev0 AFE is a CANDIDATE under G12 and must traverse normalization/reconciliation before any downstream update.
 
 PR #7's S05 architecture section must be composed with this document only after PR #6 is approved and merged. The deliberate procedure is recorded in `docs/governance/ARCHITECTURE_MERGE_PLAN.md`.
+
+
+## S05 fleet configurator boundary
+
+The repository currently contains both the controlled deal-room presentation layer and supporting server logic. S05 therefore introduces an explicit internal boundary rather than a third repository:
+
+- `lib/dds/scenario-types.ts`: transport contract and selector enums only.
+- `lib/dds/scenario-core.ts`: canonical S01/S04 physical fleet derivation, isolated from presentation.
+- `lib/dds/scenario-engine.ts`: `server-only` entry point.
+- `app/api/dds/scenario/route.ts`: authenticated derived-result endpoint.
+- `app/deal-room/fleet/page.tsx` + `components/FleetConfigurator.tsx`: presentation only.
+
+The client does not import the scenario core and does not calculate backup counts, CAPEX, funding or lease economics. S02 AFE values and S03 reconciled financial outputs are represented as explicit pending states until they are available. HYBRID 18M/24M does not assume an owned/leased split because that asset-by-asset rule is not frozen.
+
+DDS-VEN is the current computational source and presentation/application repository. S05 is a logical presentation domain within DDS-VEN. A physical repository split requires the independent deployment/access/interface criteria in ADR-0002 and is not part of this release.
