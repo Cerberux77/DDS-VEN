@@ -6,7 +6,7 @@ import type {
   FundingBridgeItem,
   ScenarioSelection,
   CashRampRow,
-} from "./scenario-types";
+} from "./scenario-types.ts";
 import {
   ACQUISITION_OPTIONS,
   CUSTOMS_MODE_OPTIONS,
@@ -18,12 +18,12 @@ import {
   OPTIONAL_475_OPTIONS,
   SURETY_RATE_OPTIONS,
   TECHNICAL_OPTIONS,
-} from "./scenario-types";
+} from "./scenario-types.ts";
 import {
   EWERT_LEAN_3F_ASSET_FAMILIES,
   EWERT_LEAN_3F_FRONTS,
   EWERT_LEAN_3F_POOLS,
-} from "./ewert-lean-3f-data";
+} from "./ewert-lean-3f-data.ts";
 
 const REQUIRED_3F_AFE = 9_410_762;
 const AUSTRAL_IN_KIND = 5_988_435;
