@@ -1,3 +1,3 @@
 import "server-only";
 
-export { buildFleetScenario, defaultScenarioSelection, parseScenarioSelection } from "./scenario-core";
+export { buildFleetScenario, defaultScenarioSelection, parseScenarioSelection } from "./s04-rev2-engine";
