@@ -50,6 +50,14 @@ if (supplier2f?.gitPolicy !== "DO_NOT_COPY" || supplier3f?.gitPolicy !== "DO_NOT
 }
 
 if (!ids.has(brand.source?.driveFileId)) fail("brand token source is not whitelisted");
+for (const requiredDriveEvidence of [
+  "1NUeprqe69umdxSCTlqCo1Bf8Fjc9scQniirK9CAqaWI",
+  "19MZo2QSwLmpH1AMKB_8aZtDxAlfVVnIdnihIT__t4aQ",
+  "1TpZOPdP2jEJsZ1jM8xtUOu7A8ouLrzPIbWqREquKEkM",
+  "1_oRZVcnHxuGnGyerdaUZli6AoH670Z8zLqZb7SjqwX4",
+]) {
+  if (!ids.has(requiredDriveEvidence)) fail(`persisted Drive evidence missing from whitelist: ${requiredDriveEvidence}`);
+}
 
 const c = controls.canonicalEconomicControls ?? {};
 const expected = {
