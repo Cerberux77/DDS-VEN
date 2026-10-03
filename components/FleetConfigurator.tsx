@@ -379,6 +379,23 @@ export function FleetConfigurator({ initialScenario }: { initialScenario: FleetS
               ) : <p>No AFE-backed asset family is available for this conceptual view.</p>}
             </aside>
           </div>
+
+          {scenario.physical.conceptualBhaComponents.length > 0 && (
+            <div className="conceptualComponentPanel">
+              <div>
+                <div className="eyebrow">BHA COMPONENT · NOT SEPARATELY PRICED</div>
+                <h3>Conceptual / included assembly components</h3>
+              </div>
+              {scenario.physical.conceptualBhaComponents.map((component) => (
+                <article key={component.name}>
+                  <strong>{component.name}</strong>
+                  <span className="sourceBadge">{component.sourceStatus.replaceAll("_", " ")}</span>
+                  <p>{component.note}</p>
+                  <small>No quantity · no price · no asset_id invented</small>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
       )}
 
