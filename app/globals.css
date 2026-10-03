@@ -58,3 +58,11 @@
 .assumptionGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.assumptionGrid article{border:1px solid var(--line);border-radius:9px;padding:13px;background:#fbfcfd}.assumptionGrid span{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:900}.assumptionGrid strong{display:block;margin:6px 0;font-size:12px;color:var(--navy)}.assumptionGrid p{margin:0;font-size:9px;line-height:1.4;color:#536572}.rev1Reconciliation{margin-top:16px;padding:15px;border-radius:10px}
 @media(max-width:980px){.selectorPrimary,.selectorAdvancedGrid,.headlineKpis,.fundingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.scenarioStrip{grid-template-columns:repeat(3,minmax(0,1fr))}.benchmarkCard{grid-template-columns:1fr}.benchmarkNumbers{grid-template-columns:repeat(2,minmax(0,1fr))}.rev1FrontGrid,.poolGrid,.assumptionGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.assetDrilldownLayout{grid-template-columns:1fr}.rev1Inspector{position:static}.rampMilestones{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:620px){.selectorPrimary,.selectorAdvancedGrid,.headlineKpis,.fundingGrid,.benchmarkNumbers,.conceptualGrid,.rev1FrontGrid,.poolGrid,.assumptionGrid,.scenarioStrip{grid-template-columns:1fr}.rampMilestones{grid-template-columns:repeat(2,minmax(0,1fr))}.grossNetBridge{grid-template-columns:1fr}.bridgeOperator{text-align:center}.fundingBridgeRow{grid-template-columns:1fr}.rev1View{padding:15px}}
+
+.conceptualComponentPanel{margin-top:16px;border:1px dashed #aebdc7;border-radius:10px;padding:14px;background:#fbfcfd}
+.conceptualComponentPanel h3{margin:4px 0 10px;color:var(--navy)}
+.conceptualComponentPanel article{display:grid;grid-template-columns:auto auto 1fr;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:10px}
+.conceptualComponentPanel article strong{font-size:12px;color:var(--navy)}
+.conceptualComponentPanel article p{margin:0;font-size:10px;color:var(--muted);line-height:1.4}
+.conceptualComponentPanel article small{grid-column:1/-1;font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:800}
+@media(max-width:620px){.conceptualComponentPanel article{grid-template-columns:1fr;align-items:start}.conceptualComponentPanel article small{grid-column:auto}}
