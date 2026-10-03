@@ -1,62 +1,69 @@
-# DDS-S05 → S06 handoff
+# DDS-S05 Rev1 → S06 handoff
+**Lifecycle:** CANDIDATE  
+**Date:** 2026-10-03
 
-## Frozen interface from S05
-
-S06 must consume the server-derived `FleetScenario` contract. Do not reproduce S01/S04 fleet formulas in the browser, Excel adapters, dashboards, or presentation code.
+## Frozen S05 interface
+S06 must consume the server-derived `FleetScenario` contract. Do not reproduce S04 economics in browser code, Excel adapters, dashboards or alternate HTML logic.
 
 Canonical entry points:
+- `lib/dds/scenario-types.ts` — S04 selector and view-model contract.
+- `lib/dds/s04-rev1-data.ts` — exact S04 machine-handoff economic snapshots and control values.
+- `lib/dds/ewert-lean-2f-data.ts` — S02 AFE-backed physical 2F asset-family view.
+- `lib/dds/scenario-core.ts` — server resolver; lookup/presentation composition only.
+- `lib/dds/scenario-engine.ts` — `server-only` boundary.
+- `POST /api/dds/scenario` — authenticated derived scenario endpoint.
+- `/deal-room/fleet` — Rev1 five-view presentation layer.
+- `docs/S05_S06_MACHINE_HANDOFF.json` — machine-readable handoff summary.
 
-- `lib/dds/scenario-types.ts` — selectors and scenario DTO.
-- `lib/dds/scenario-core.ts` — physical fleet derivation.
-- `lib/dds/scenario-engine.ts` — server-only boundary.
-- `POST /api/dds/scenario` — authenticated derived scenario result.
-- `/deal-room/fleet` — presentation layer.
+## Resolved economic authority
+S04 Rev1 provides nine exact resolved scenarios:
+- STATIC_2F × DSO45/60/90
+- STATIC_3F × DSO45/60/90
+- RAMP_3_TO_10 × DSO45/60/90
 
-## Reconciled physical rules
+All are EWERT_LEAN + PURCHASE + TEMPORARY_ADMISSION + customs factor 65% + surety 2% + SURETY_BOND + Hydrocarbon Benefit OFF + Optional 4¾ OFF.
 
-For each diameter (12 1/4 and 8 1/2):
+S05 does not interpolate or extrapolate economics for other selector combinations.
 
-- MAIN = F.
-- IDEAL BACKUP = F.
-- OPTIMIZED BACKUP = CEILING(F/2).
-- Diameters are not interchangeable.
-- Backup coverage is explicit in every asset record.
+## Physical authority
+For STATIC_2F + EWERT_LEAN:
+- render actual S02 AFE asset families and S01/S02 interpretations;
+- commercial KIT quantity and physical capacity are separate dimensions;
+- shared backup / rotation / base pools are explicit;
+- Crossovers are S01 conceptual/included BHA components if no separate AFE line exists. No quantity, price or asset_id is created.
 
-S05 QA covers Fronts 1–10 and validates required-set count, allocation count, and backup coverage.
+For STATIC_3F and RAMP:
+- label physical/economic views MODEL DERIVED;
+- do not present projected asset lines as supplier quotes;
+- retain the 2F Asset Register as the detailed AFE-backed anchor.
 
-## Financial gates intentionally left open
+IDEAL and OPTIMIZED remain conceptual physical sensitivities and must never be visually conflated with EWERT_LEAN.
 
-Do not replace these with estimates or hardcodes:
+## Funding semantics
+- Gross Peak Funding ≠ Required Equity.
+- Confirmed Austral Asset Contribution currently equals USD 0 based on current documentary evidence.
+- This status does not mean Austral owns zero equipment.
+- Default Ramp DSO90 residual is labeled `Operating Cash / Collections Reconciliation`, not “negative working capital cost”.
+- Target Funding Capacity = authoritative S04 output; S05 does not rebuild the bridge formula.
 
-1. Normalized S02 AFE values by asset.
-2. S02 asset-by-asset OWNED vs LEASED allocation for HYBRID 18M/24M.
-3. Exact economic meaning of the stated 16% leasing CoC (APR/effective/nominal/flat).
-4. Purchase/down-payment/import/commissioning/deposit/buyout/balloon terms where applicable.
-5. S03 reconciled M1–M24 outputs for Peak Funding and 24M Financial Impact.
-6. Location, owner evidence, surface/telemetry allocation, and minimum spares/support quantities.
+## Open gates
+- leasing commercial terms;
+- final customs validation / packing list;
+- confirmed Austral asset-level credit;
+- spares consumption/replenishment;
+- support infrastructure scope;
+- accounting classification;
+- contract timing risk;
+- S04 Excel persistence tooling recovery.
 
-Until those inputs are frozen, the API returns explicit `PENDING_AFE` / `PENDING_S03` states.
+These are not S05 computational blockers. Unresolved selector combinations return controlled PENDING states.
 
-## S06 integration sequence
+## Release controls
+PR #7 remains DRAFT. No merge and no production release without Manuel approval.
 
-1. Add an S02 asset-register adapter behind the scenario engine; preserve the existing DTO.
-2. Resolve HYBRID allocation asset-by-asset and enforce `owned + leased = available fleet`.
-3. Add an S03 financial-output adapter for Equipment CAPEX, Upfront Cash, Peak Funding, Lease Cost, and 24M Financial Impact.
-4. Add snapshot fixtures exported from the canonical Excel/scenario engine and test exact parity.
-5. Extend reconciliation so economic status becomes PASS only when S02/S03 values have canonical evidence.
-6. Keep the client presentation-only and retain the approved Mantis visual identity.
-7. Do not expose source workbooks or editable model files through PREVIEW routes.
-
-## Release gate for S06
-
-A scenario may be labeled fully reconciled only when:
-
-- physical set count matches the canonical engine;
-- backup coverage is valid by diameter;
-- owned + leased equals available fleet when acquisition allocation is applicable;
-- all displayed financial values match canonical S02/S03/Excel outputs for the same selectors;
-- no UI-only formula can change those values.
-
-## S05 deployment note
-
-S05 is isolated in draft PR #7 on branch `run/dds-s05-fleet-configurator`. Production is unchanged until the PR is reviewed/merged.
+## S06 acceptance
+S06 may proceed when CI confirms the S05 resolver/tests. If preview remains protected, use `READY_WITH_OPEN_VISUAL_GATE` provided:
+- computational UI reconciliation passes;
+- browser/server source boundary passes;
+- blocker is specifically documented;
+- production remains unchanged.
