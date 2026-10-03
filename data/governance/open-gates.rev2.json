@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 2,
+  "version": "Rev2",
+  "gates": [
+    {
+      "id": "G01",
+      "code": "PENDING_LEASING",
+      "status": "BLOCKED_EXTERNAL",
+      "owner": "Ewert/Austral + leasing provider",
+      "blocking": true,
+      "affectedOutputs": [
+        "HYBRID_18M",
+        "HYBRID_24M",
+        "net funding"
+      ],
+      "nextAction": "Obtain complete commercial leasing terms.",
+      "requiredEvidence": [
+        "asset eligibility",
+        "principal",
+        "rate definition",
+        "18/24M term",
+        "deposit",
+        "payments",
+        "balloon",
+        "buyout",
+        "insurance",
+        "maintenance",
+        "replacement",
+        "prepayment",
+        "freight/customs treatment"
+      ],
+      "promotionCondition": "All material terms documented and financial outputs reconciled."
+    },
+    {
+      "id": "G02",
+      "code": "PENDING_CUSTOMS_FINAL_VALIDATION",
+      "status": "BLOCKED_EXTERNAL",
+      "owner": "Manuel + formal customs/legal advisor",
+      "blocking": true,
+      "affectedOutputs": [
+        "customs cash",
+        "surety",
+        "tax treatment",
+        "external economic presentation"
+      ],
+      "nextAction": "Validate Temporary Admission, 65% working factor and surety basis with formal evidence.",
+      "requiredEvidence": [
+        "formal customs/legal opinion or broker documentation"
+      ],
+      "promotionCondition": "FORMALLY_VALIDATED evidence; 65% no longer only working practice."
+    },
+    {
+      "id": "G03",
+      "code": "AUSTRAL_ASSET_CONTRIBUTION",
+      "status": "RECONCILED_CANDIDATE",
+      "owner": "Ewert/Austral",
+      "blocking": false,
+      "affectedOutputs": [
+        "partner capitalization",
+        "cash funding",
+        "true-up"
+      ],
+      "nextAction": "Obtain serial/condition/availability schedule supporting the Rev2 USD 5,988,435 in-kind classification.",
+      "requiredEvidence": [
+        "asset serial list",
+        "condition",
+        "availability",
+        "ownership/contribution basis"
+      ],
+      "promotionCondition": "Rev2 line-item classification reconciled; detailed serial evidence required before APPROVED contribution valuation."
+    },
+    {
+      "id": "G04",
+      "code": "SPARES_CONSUMPTION_REPLENISHMENT",
+      "status": "OPEN",
+      "owner": "Ewert/Austral + model owner",
+      "blocking": false,
+      "affectedOutputs": [
+        "OPEX",
+        "FCF",
+        "spares inventory"
+      ],
+      "nextAction": "Reconcile startup inventory with USD55k/well recurring consumption/replenishment.",
+      "requiredEvidence": [
+        "consumption history",
+        "replenishment policy",
+        "lead times"
+      ],
+      "promotionCondition": "No double count and recurring OPEX bridge reconciled."
+    },
+    {
+      "id": "G05",
+      "code": "SUPPORT_INFRASTRUCTURE_SCOPE",
+      "status": "RECONCILED_CANDIDATE",
+      "owner": "Manuel + partners",
+      "blocking": false,
+      "affectedOutputs": [
+        "infrastructure CAPEX",
+        "Panthers cash ramp"
+      ],
+      "nextAction": "Replace P50 facility/vehicle estimates with vendor quotations as they arrive.",
+      "requiredEvidence": [
+        "60x40m layout",
+        "civil quotations",
+        "crane quote",
+        "generator/electrical quote",
+        "vehicle/forklift quotes"
+      ],
+      "promotionCondition": "Vendor-backed values replace management estimates."
+    },
+    {
+      "id": "G06",
+      "code": "ACCOUNTING_CLASSIFICATION",
+      "status": "OPEN",
+      "owner": "TBD accounting advisor",
+      "blocking": false,
+      "affectedOutputs": [
+        "CAPEX/OPEX",
+        "D&A",
+        "EBIT",
+        "tax"
+      ],
+      "nextAction": "Confirm software, mixed hardware/software and freight capitalization policy.",
+      "requiredEvidence": [
+        "accounting policy"
+      ],
+      "promotionCondition": "Accounting treatment approved and model reconciled."
+    },
+    {
+      "id": "G07",
+      "code": "CONTRACT_TIMING_RISK",
+      "status": "OPEN",
+      "owner": "Ewert/Austral + contracting parties",
+      "blocking": false,
+      "affectedOutputs": [
+        "procurement timing",
+        "ramp",
+        "cash timing"
+      ],
+      "nextAction": "Validate procurement/service-contract timing against reported 30–60 day preparation.",
+      "requiredEvidence": [
+        "contract timetable",
+        "supplier payment schedule"
+      ],
+      "promotionCondition": "Timing reflected in cash model or explicitly accepted as management assumption."
+    },
+    {
+      "id": "G08",
+      "code": "S03_REV2_CANONICAL_XLSX_INTEGRATION",
+      "status": "OPEN",
+      "owner": "Manuel / model tooling",
+      "blocking": true,
+      "affectedOutputs": [
+        "final canonical S03 workbook approval"
+      ],
+      "nextAction": "Integrate Rev2 cash-ramp workbook into the canonical S03 financial workbook and reconcile formulas.",
+      "requiredEvidence": [
+        "canonical Rev2 XLSX",
+        "formula QA",
+        "reconciliation PASS"
+      ],
+      "promotionCondition": "Rev2 workbook promoted through Manuel gate."
+    },
+    {
+      "id": "G09",
+      "code": "S04_REV2_CANONICAL_EXCEL_INTEGRATION",
+      "status": "OPEN",
+      "owner": "Manuel / model tooling",
+      "blocking": true,
+      "affectedOutputs": [
+        "final canonical S04 Excel selector approval"
+      ],
+      "nextAction": "Integrate Rev2 sliders/partner funding logic into canonical S04 Excel and reconcile against server engine.",
+      "requiredEvidence": [
+        "Rev2 selector workbook",
+        "formula QA",
+        "scenario reconciliation"
+      ],
+      "promotionCondition": "Excel and server scenario outputs reconcile and Manuel approves promotion."
+    },
+    {
+      "id": "G10",
+      "code": "S05_VISUAL_QA_VERCEL_ACCESS",
+      "status": "OPEN_ACCESS_GATE",
+      "owner": "Manuel / Vercel project authorization",
+      "blocking": true,
+      "affectedOutputs": [
+        "production release",
+        "external presentation readiness"
+      ],
+      "nextAction": "Obtain authorized browser access and perform visual QA; do not disable protection globally.",
+      "requiredEvidence": [
+        "authorized visual QA evidence"
+      ],
+      "promotionCondition": "VISUAL_QA=PASS or explicit Manuel waiver; production still requires separate approval."
+    },
+    {
+      "id": "G11",
+      "code": "PACKING_LIST_FINAL",
+      "status": "OPEN",
+      "owner": "Ewert/Austral",
+      "blocking": false,
+      "affectedOutputs": [
+        "freight",
+        "customs",
+        "mobilization"
+      ],
+      "nextAction": "Obtain final packing list, weights, dimensions and containerization.",
+      "requiredEvidence": [
+        "packing list",
+        "weights",
+        "dimensions",
+        "container plan"
+      ],
+      "promotionCondition": "Logistics/customs inputs reconciled."
+    },
+    {
+      "id": "G12",
+      "code": "S02_3F_AFE_NORMALIZATION_RECONCILIATION",
+      "status": "RECONCILED_CANDIDATE",
+      "owner": "Manuel / DDS model",
+      "blocking": false,
+      "affectedOutputs": [
+        "3F supplier-backed base",
+        "S04 Rev2 liquidity engine",
+        "S05 Rev2 UI"
+      ],
+      "nextAction": "Complete CI, visual QA, and Manuel promotion/merge gate; keep growth >3F unresolved.",
+      "requiredEvidence": [
+        "3F supplier AFE",
+        "Rev2 cash-ramp workbook",
+        "S04 Rev2 engine",
+        "S05 tests/CI"
+      ],
+      "promotionCondition": "CI PASS + evidence chain PASS + Manuel promotion decision."
+    }
+  ]
+}
