@@ -158,6 +158,54 @@
       "gitPolicy": "METADATA_ONLY",
       "relatedModelInput": null,
       "relatedRelease": null
+    },
+    {
+      "driveFileId": "1NUeprqe69umdxSCTlqCo1Bf8Fjc9scQniirK9CAqaWI",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/06_S06_ORESHNIK_DRIVE_GITHUB_GMAIL_GOVERNANCE/DDS_Governance_Rev1_Release_Control_Package_CANDIDATE_2026-10-03",
+      "version": "S06-Rev1",
+      "modifiedTime": "2026-10-03T05:42:07.967Z",
+      "hash": null,
+      "documentType": "S06_RELEASE_CONTROL_PACKAGE",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": "DDS_GOVERNANCE_REV1"
+    },
+    {
+      "driveFileId": "19MZo2QSwLmpH1AMKB_8aZtDxAlfVVnIdnihIT__t4aQ",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/07_FOLLOW_UP_AND_GATES/07_OPEN_GATES_REGISTER_REV1_CANDIDATE_2026-10-03",
+      "version": "S06-Rev1",
+      "modifiedTime": "2026-10-03T05:42:15.831Z",
+      "hash": null,
+      "documentType": "OPEN_GATES_REGISTER",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": "DDS_GOVERNANCE_REV1"
+    },
+    {
+      "driveFileId": "1TpZOPdP2jEJsZ1jM8xtUOu7A8ouLrzPIbWqREquKEkM",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/00_INDICE_NAVEGABLE_ECONOMICAL_TECNICAL_REBASE_REV1_CANDIDATE_2026-10-03",
+      "version": "Rev1",
+      "modifiedTime": "2026-10-03T05:42:22.983Z",
+      "hash": null,
+      "documentType": "REBASE_INDEX_REV1",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": "DDS_GOVERNANCE_REV1"
+    },
+    {
+      "driveFileId": "1_oRZVcnHxuGnGyerdaUZli6AoH670Z8zLqZb7SjqwX4",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/06_S06_ORESHNIK_DRIVE_GITHUB_GMAIL_GOVERNANCE/S06_FINAL_TRANSVERSAL_AUDIT_INPUT_PACK_CANDIDATE_2026-10-03",
+      "version": "S06-Rev1",
+      "modifiedTime": "2026-10-03T05:43:00.769Z",
+      "hash": null,
+      "documentType": "TRANSVERSAL_AUDIT_INPUT_PACK",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": "DDS_GOVERNANCE_REV1"
     }
   ],
   "notes": [
