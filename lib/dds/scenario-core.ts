@@ -1,243 +1,331 @@
 import {
   ACQUISITION_OPTIONS,
-  FRONT_OPTIONS,
+  CUSTOMS_MODE_OPTIONS,
+  CUSTOMS_VALUE_FACTOR_OPTIONS,
+  DSO_OPTIONS,
+  FRONT_CONFIGURATION_OPTIONS,
+  GUARANTEE_MODE_OPTIONS,
+  HYDROCARBON_BENEFIT_OPTIONS,
+  OPTIONAL_475_OPTIONS,
+  SURETY_RATE_OPTIONS,
   TECHNICAL_OPTIONS,
-  type AcquisitionStrategy,
-  type BHAComponent,
-  type Diameter,
-  type FleetAsset,
+  type EconomicSnapshot,
   type FleetScenario,
-  type FrontCount,
-  type ScenarioCounts,
+  type FrontView,
   type ScenarioSelection,
-  type TechnicalConfiguration,
 } from "./scenario-types.ts";
+import {
+  S04_2F_PURCHASE_STARTUP_P50,
+  S04_CONFIRMED_AUSTRAL_ASSET_CONTRIBUTION,
+  S04_CORE_SCENARIOS,
+  S04_DEFAULT_FUNDING_BRIDGE,
+  S04_DEFAULT_SELECTION,
+  S04_LIH_BASIS,
+  S04_OPTIONAL_475_KNOWN_CAPEX,
+  S04_RAMP_MILESTONES,
+} from "./s04-rev1-data.ts";
+import {
+  EWERT_LEAN_2F_ASSET_FAMILIES,
+  EWERT_LEAN_2F_FRONTS,
+  EWERT_LEAN_2F_POOLS,
+} from "./ewert-lean-2f-data.ts";
 
-const DIAMETERS: Diameter[] = ['12 1/4"', '8 1/2"'];
-
-const BHA_COMPOSITION: BHAComponent[] = [
-  { name: "Motor", relationship: "Downhole BHA", status: "DEFINED" },
-  { name: "Gamma / PWD (MWD)", relationship: "Directional + pressure measurement", status: "DEFINED" },
-  { name: "Resistivity", relationship: "LWD formation evaluation", status: "DEFINED" },
-  { name: "Monel / NMDC", relationship: "Non-magnetic collar section", status: "DEFINED" },
-  { name: "Jar", relationship: "Downhole contingency / release", status: "DEFINED" },
-  { name: "Stabilizers ×2", relationship: "BHA stabilization", status: "DEFINED" },
-  { name: "Crossovers", relationship: "Mechanical interface set", status: "DEFINED" },
-  { name: "Surface / telemetry", relationship: "Surface system relationship; exact allocation pending AFE", status: "PENDING_AFE" },
-  { name: "Spares / support", relationship: "Minimum operating spares/support quantities pending AFE", status: "PENDING_AFE" },
-];
-
-const TECHNICAL_RULES: Record<TechnicalConfiguration, (fronts: number) => ScenarioCounts> = {
-  IDEAL: (fronts) => {
-    const mainPerDiameter = fronts;
-    const backupPerDiameter = fronts;
-    const totalPerDiameter = mainPerDiameter + backupPerDiameter;
-    return { mainPerDiameter, backupPerDiameter, totalPerDiameter, totalSets: totalPerDiameter * 2 };
-  },
-  OPTIMIZED: (fronts) => {
-    const mainPerDiameter = fronts;
-    const backupPerDiameter = Math.ceil(fronts / 2);
-    const totalPerDiameter = mainPerDiameter + backupPerDiameter;
-    return { mainPerDiameter, backupPerDiameter, totalPerDiameter, totalSets: totalPerDiameter * 2 };
-  },
-};
-
-function isFrontCount(value: unknown): value is FrontCount {
-  return typeof value === "number" && FRONT_OPTIONS.includes(value as FrontCount);
-}
-
-function isTechnical(value: unknown): value is TechnicalConfiguration {
-  return typeof value === "string" && TECHNICAL_OPTIONS.includes(value as TechnicalConfiguration);
-}
-
-function isAcquisition(value: unknown): value is AcquisitionStrategy {
-  return typeof value === "string" && ACQUISITION_OPTIONS.includes(value as AcquisitionStrategy);
+function included<T extends readonly unknown[]>(values: T, value: unknown): value is T[number] {
+  return values.includes(value as never);
 }
 
 export function parseScenarioSelection(value: unknown): ScenarioSelection {
   if (!value || typeof value !== "object") throw new Error("INVALID_SCENARIO_SELECTION");
   const input = value as Record<string, unknown>;
-  if (!isFrontCount(input.fronts) || !isTechnical(input.technical) || !isAcquisition(input.acquisition)) {
+  const frontCount = Number(input.futureTechnicalFrontCount);
+
+  if (
+    !included(FRONT_CONFIGURATION_OPTIONS, input.frontConfiguration) ||
+    !included(TECHNICAL_OPTIONS, input.technical) ||
+    !included(ACQUISITION_OPTIONS, input.acquisition) ||
+    !included(DSO_OPTIONS, input.dso) ||
+    !included(CUSTOMS_MODE_OPTIONS, input.customsMode) ||
+    !included(CUSTOMS_VALUE_FACTOR_OPTIONS, input.customsValueFactor) ||
+    !included(SURETY_RATE_OPTIONS, input.suretyRate) ||
+    !included(GUARANTEE_MODE_OPTIONS, input.guaranteeMode) ||
+    !included(HYDROCARBON_BENEFIT_OPTIONS, input.hydrocarbonBenefit) ||
+    !included(OPTIONAL_475_OPTIONS, input.optional475) ||
+    !Number.isInteger(frontCount) || frontCount < 1 || frontCount > 10
+  ) {
     throw new Error("INVALID_SCENARIO_SELECTION");
   }
+
   return {
-    fronts: input.fronts,
+    frontConfiguration: input.frontConfiguration,
     technical: input.technical,
     acquisition: input.acquisition,
-  };
+    dso: input.dso,
+    customsMode: input.customsMode,
+    customsValueFactor: input.customsValueFactor,
+    suretyRate: input.suretyRate,
+    guaranteeMode: input.guaranteeMode,
+    hydrocarbonBenefit: input.hydrocarbonBenefit,
+    optional475: input.optional475,
+    futureTechnicalFrontCount: frontCount,
+  } as ScenarioSelection;
 }
 
-function diameterCode(diameter: Diameter) {
-  return diameter === '12 1/4"' ? "1214" : "0850";
-}
-
-function acquisitionState(acquisition: AcquisitionStrategy) {
-  return acquisition === "PURCHASE" ? "OWNED" as const : "UNASSIGNED" as const;
-}
-
-function makeAsset(input: {
-  selection: ScenarioSelection;
-  diameter: Diameter;
-  role: "MAIN" | "BACKUP";
-  ordinal: number;
-  coversFronts: number[];
-}): FleetAsset {
-  const { selection, diameter, role, ordinal, coversFronts } = input;
-  const suffix = String(ordinal).padStart(2, "0");
-  const state = acquisitionState(selection.acquisition);
+function rowToEconomics(row: (typeof S04_CORE_SCENARIOS)[number]): EconomicSnapshot {
   return {
-    assetId: `DDS-${diameterCode(diameter)}-${role}-${role === "MAIN" ? "F" : "P"}${suffix}`,
-    diameter,
-    role,
-    assignment: role === "MAIN" ? `FRONT ${suffix}` : `BACKUP POOL ${suffix}`,
-    coversFronts,
-    owner: "TBD — S02 ownership evidence",
-    acquisitionState: state,
-    capexValue: null,
-    leaseState: selection.acquisition === "PURCHASE" ? "N/A" : "PENDING_ASSET_ASSIGNMENT",
-    status: "PLANNED",
-    location: "TBD",
-    availability: "PLANNED",
-    composition: BHA_COMPOSITION.map((item) => ({ ...item })),
+    scenarioId: row.scenario_id,
+    status: "RESOLVED",
+    sourceStatus: row.source_status,
+    equipmentCapex: row.equipment_capex,
+    purchaseStartupP50: row.front_configuration === "STATIC_2F" ? S04_2F_PURCHASE_STARTUP_P50 : null,
+    preopCash: row.preop_cash,
+    m0M4CashRequirement: row.m0_m4_cash_requirement,
+    year1Funding: row.year1_funding,
+    grossPeakFunding: row.peak_funding,
+    confirmedAustralContribution: S04_CONFIRMED_AUSTRAL_ASSET_CONTRIBUTION,
+    netPeakFunding: row.peak_funding,
+    liquidityFloor: row.liquidity_floor,
+    targetFundingCapacity: row.peak_plus_floor,
+    peakAR: row.peak_ar,
+    revenue24M: row.revenue_24m,
+    ebitda24M: row.ebitda_24m,
+    netIncome24M: row.net_income_24m,
+    fcf24M: row.fcf_24m,
+    logistics: row.logistics,
+    surety: row.surety,
+    suspendedTaxes: row.suspended_taxes,
+    restrictedCash: row.restricted_cash,
+    optional475KnownCapex: S04_OPTIONAL_475_KNOWN_CAPEX,
+    note: "Exact S04 Rev1 machine-handoff snapshot. No economic formula is executed in S05.",
   };
 }
 
-function buildAssets(selection: ScenarioSelection, counts: ScenarioCounts): FleetAsset[] {
-  const assets: FleetAsset[] = [];
+function pendingEconomics(status: EconomicSnapshot["status"], note: string): EconomicSnapshot {
+  return {
+    scenarioId: null,
+    status,
+    sourceStatus:
+      status === "PENDING_LEASING" ? "PENDING_LEASING"
+      : status === "PENDING_FORMAL_VALIDATION" ? "PENDING_FORMAL_VALIDATION"
+      : "PENDING_S04_RESOLUTION",
+    equipmentCapex: null,
+    purchaseStartupP50: null,
+    preopCash: null,
+    m0M4CashRequirement: null,
+    year1Funding: null,
+    grossPeakFunding: null,
+    confirmedAustralContribution: S04_CONFIRMED_AUSTRAL_ASSET_CONTRIBUTION,
+    netPeakFunding: null,
+    liquidityFloor: null,
+    targetFundingCapacity: null,
+    peakAR: null,
+    revenue24M: null,
+    ebitda24M: null,
+    netIncome24M: null,
+    fcf24M: null,
+    logistics: null,
+    surety: null,
+    suspendedTaxes: null,
+    restrictedCash: null,
+    optional475KnownCapex: S04_OPTIONAL_475_KNOWN_CAPEX,
+    note,
+  };
+}
 
-  for (const diameter of DIAMETERS) {
-    for (let front = 1; front <= counts.mainPerDiameter; front += 1) {
-      assets.push(makeAsset({
-        selection,
-        diameter,
-        role: "MAIN",
-        ordinal: front,
-        coversFronts: [front],
-      }));
-    }
-
-    for (let pool = 1; pool <= counts.backupPerDiameter; pool += 1) {
-      const coversFronts = selection.technical === "IDEAL"
-        ? [pool]
-        : [pool * 2 - 1, pool * 2].filter((front) => front <= selection.fronts);
-
-      assets.push(makeAsset({
-        selection,
-        diameter,
-        role: "BACKUP",
-        ordinal: pool,
-        coversFronts,
-      }));
-    }
+function economicSnapshot(selection: ScenarioSelection): EconomicSnapshot {
+  if (selection.acquisition !== "PURCHASE") {
+    return pendingEconomics(
+      "PENDING_LEASING",
+      "PENDING LEASING TERMS: asset eligibility, rate definition, deposit, term, payment, balloon, buyout, insurance, maintenance, replacement and prepayment are unresolved."
+    );
   }
 
-  return assets;
-}
-
-function backupCoverageValid(assets: FleetAsset[], fronts: number) {
-  return DIAMETERS.every((diameter) => {
-    const covered = new Set(
-      assets
-        .filter((asset) => asset.diameter === diameter && asset.role === "BACKUP")
-        .flatMap((asset) => asset.coversFronts)
+  if (selection.hydrocarbonBenefit === "ON") {
+    return pendingEconomics(
+      "PENDING_FORMAL_VALIDATION",
+      "Hydrocarbon benefit is ON, but S04 grants no economic credit until formal validation."
     );
-    return Array.from({ length: fronts }, (_, index) => index + 1).every((front) => covered.has(front));
-  });
+  }
+
+  const isCoreConfiguration =
+    selection.technical === "EWERT_LEAN" &&
+    selection.customsMode === "TEMPORARY_ADMISSION" &&
+    selection.customsValueFactor === 0.65 &&
+    selection.suretyRate === 0.02 &&
+    selection.guaranteeMode === "SURETY_BOND" &&
+    selection.optional475 === "NO";
+
+  if (!isCoreConfiguration) {
+    return pendingEconomics(
+      "PENDING_S04_RESOLUTION",
+      selection.optional475 === "YES"
+        ? "Optional 4¾ capability has known CAPEX USD 179,603, but incremental logistics/customs and the complete scenario economics are unresolved in the S04 handoff."
+        : "This selector combination is valid in the S04 schema but no resolved economic snapshot is present in the current S05 machine handoff. S05 does not recalculate it."
+    );
+  }
+
+  const row = S04_CORE_SCENARIOS.find(
+    (candidate) =>
+      candidate.front_configuration === selection.frontConfiguration &&
+      candidate.dso === selection.dso
+  );
+  if (!row) return pendingEconomics("PENDING_S04_RESOLUTION", "No matching S04 core scenario snapshot.");
+  return rowToEconomics(row);
 }
 
-function financials(selection: ScenarioSelection, totalSets: number): FleetScenario["financials"] {
-  const purchase = selection.acquisition === "PURCHASE";
-  const leaseTermMonths = selection.acquisition === "HYBRID_LEASE_18M"
-    ? 18
-    : selection.acquisition === "HYBRID_LEASE_24M"
-      ? 24
-      : 0;
+function benchmark2F(dso: ScenarioSelection["dso"]): EconomicSnapshot {
+  const row = S04_CORE_SCENARIOS.find(
+    (candidate) => candidate.front_configuration === "STATIC_2F" && candidate.dso === dso
+  );
+  if (!row) throw new Error("MISSING_S04_2F_BENCHMARK");
+  return rowToEconomics(row);
+}
 
+function projectedFronts(count: number): FrontView[] {
+  return Array.from({ length: count }, (_, index) => ({
+    front: index + 1,
+    families: [
+      {
+        holeFamily: "12-1/4\"" as const,
+        items: ["MWD/PWD/Gamma capacity", "PR2 8-1/4", "Motor 8 in", "Jar 7-3/4", "NMDC 8 in", "Stabilizer 12-1/8", "UBHO 8 in"],
+        operatingNote: "MODEL DERIVED front architecture; not a supplier-quoted line-item allocation."
+      },
+      {
+        holeFamily: "8-1/2\"" as const,
+        items: ["MWD/PWD/Gamma capacity", "PR2 6-3/4", "Motor 6-3/4", "Jar 6-1/2", "NMDC 6-3/4", "Stabilizer 8-3/8", "UBHO 6-3/4"],
+        operatingNote: "MODEL DERIVED front architecture; phases are capacity families and are not assumed simultaneous."
+      }
+    ]
+  }));
+}
+
+function physicalView(selection: ScenarioSelection): FleetScenario["physical"] {
+  if (selection.technical === "EWERT_LEAN") {
+    if (selection.frontConfiguration === "STATIC_2F") {
+      return {
+        mode: "EWERT_LEAN_2F",
+        sourceStatus: "AFE_BACKED",
+        fronts: EWERT_LEAN_2F_FRONTS,
+        pools: EWERT_LEAN_2F_POOLS,
+        assetFamilies: EWERT_LEAN_2F_ASSET_FAMILIES,
+        rampMilestones: S04_RAMP_MILESTONES,
+        note: "Supplier-backed 2F physical anchor. Commercial KIT quantity and physical capacity are intentionally separated."
+      };
+    }
+
+    if (selection.frontConfiguration === "STATIC_3F") {
+      return {
+        mode: "PROJECTED",
+        sourceStatus: "MODEL_DERIVED",
+        fronts: projectedFronts(3),
+        pools: EWERT_LEAN_2F_POOLS,
+        assetFamilies: EWERT_LEAN_2F_ASSET_FAMILIES,
+        rampMilestones: S04_RAMP_MILESTONES,
+        note: "3F is MODEL DERIVED and not a supplier quote. Asset drilldown remains the 2F AFE-backed anchor; no line-item 3F AFE is fabricated."
+      };
+    }
+
+    return {
+      mode: "PROJECTED",
+      sourceStatus: "MODEL_DERIVED",
+      fronts: [],
+      pools: EWERT_LEAN_2F_POOLS,
+      assetFamilies: EWERT_LEAN_2F_ASSET_FAMILIES,
+      rampMilestones: S04_RAMP_MILESTONES,
+      note: "Ramp 3→10 is a management/model-derived capacity path. Detailed asset cards remain the 2F AFE-backed anchor."
+    };
+  }
+
+  const fronts = selection.futureTechnicalFrontCount;
+  const mainPerDiameter = fronts;
+  const backupPerDiameter = selection.technical === "IDEAL" ? fronts : Math.ceil(fronts / 2);
   return {
-    totalSets,
-    ownedSets: purchase ? totalSets : null,
-    leasedSets: purchase ? 0 : null,
-    equipmentCapex: {
-      value: null,
-      currency: "USD",
-      state: "PENDING_AFE",
-      note: "Requires normalized S02 AFE asset values; no provisional resistivity/additional-cost figures are capitalized here.",
+    mode: "CONCEPTUAL",
+    sourceStatus: "MODEL_DERIVED",
+    fronts: [],
+    pools: [],
+    assetFamilies: [],
+    conceptualSummary: {
+      fronts,
+      mainPerDiameter,
+      backupPerDiameter,
+      totalPhysicalBhaPositions: (mainPerDiameter + backupPerDiameter) * 2,
     },
-    upfrontCash: {
-      value: null,
-      currency: "USD",
-      state: "PENDING_AFE",
-      note: "Requires purchase/down-payment/import/commissioning/deposit values by asset.",
-    },
-    peakFunding: {
-      value: null,
-      currency: "USD",
-      state: "PENDING_S03",
-      note: "Requires the reconciled M1–M24 cash model, DSO scenario and asset-level acquisition schedule.",
-    },
-    leaseCost: {
-      value: purchase ? 0 : null,
-      currency: "USD",
-      state: purchase ? "RESOLVED" : "PENDING_AFE",
-      note: purchase
-        ? "No lease cost under PURCHASE."
-        : "16% CoC is known, but its basis and the leased asset allocation are not yet frozen.",
-    },
-    financialImpact24M: {
-      value: null,
-      currency: "USD",
-      state: "PENDING_S03",
-      note: "Requires reconciled S03 P&L/cash-flow outputs; UI does not calculate an independent financial model.",
-    },
-    leaseTermMonths,
-    costOfCapitalPct: purchase ? null : 16,
-    costOfCapitalBasis: purchase ? "N/A" : "PENDING_DEFINITION (APR/effective/nominal/flat)",
+    rampMilestones: S04_RAMP_MILESTONES,
+    note: `${selection.technical} is a conceptual physical sensitivity, not EWERT_LEAN and not a supplier quote. No economic result is calculated in S05.`
   };
+}
+
+function scenarioLabel(selection: ScenarioSelection) {
+  if (selection.frontConfiguration === "STATIC_2F") return "2F STARTUP — EWERT AFE REV0";
+  if (selection.frontConfiguration === "STATIC_3F") return "3F STARTUP — PROJECTED";
+  return "RAMP 3→10 — MANAGEMENT VIEW";
+}
+
+function sourceBadge(selection: ScenarioSelection, economics: EconomicSnapshot): FleetScenario["sourceBadge"] {
+  if (economics.status === "PENDING_LEASING") return "PENDING LEASING";
+  if (economics.status !== "RESOLVED") return "PENDING VALIDATION";
+  return selection.frontConfiguration === "STATIC_2F" ? "AFE BACKED" : "MODEL DERIVED";
 }
 
 export function buildFleetScenario(selectionInput: ScenarioSelection): FleetScenario {
   const selection = parseScenarioSelection(selectionInput);
-  const counts = TECHNICAL_RULES[selection.technical](selection.fronts);
-  const assets = buildAssets(selection, counts);
-  const hybrid = selection.acquisition !== "PURCHASE";
-  const resolvedOwned = assets.filter((asset) => asset.acquisitionState === "OWNED").length;
-  const resolvedLeased = assets.filter((asset) => asset.acquisitionState === "LEASED").length;
-
-  const assumptions = [
-    "S01/S04 technical rules are authoritative: MAIN = F per diameter; IDEAL BACKUP = F; OPTIMIZED BACKUP = CEILING(F/2).",
-    "12 1/4 and 8 1/2 sets are modeled as non-interchangeable.",
-    "Asset values, owner evidence, locations, surface allocation and minimum spares remain pending S02 AFE reconciliation.",
-  ];
-  if (hybrid) {
-    assumptions.push("HYBRID does not silently assign assets to OWNED or LEASED: S02 has not frozen the asset-by-asset allocation.");
-    assumptions.push("Lease CoC = 16% is displayed as an input, but its rate basis remains pending definition.");
-  }
-
-  const acquisitionBalanceValid = hybrid
-    ? null
-    : resolvedOwned + resolvedLeased === assets.length;
+  const economics = economicSnapshot(selection);
+  const isDefaultFundingBridge =
+    economics.status === "RESOLVED" &&
+    selection.frontConfiguration === S04_DEFAULT_SELECTION.frontConfiguration &&
+    selection.technical === S04_DEFAULT_SELECTION.technical &&
+    selection.acquisition === S04_DEFAULT_SELECTION.acquisition &&
+    selection.dso === S04_DEFAULT_SELECTION.dso &&
+    selection.customsMode === S04_DEFAULT_SELECTION.customsMode &&
+    selection.customsValueFactor === S04_DEFAULT_SELECTION.customsValueFactor &&
+    selection.suretyRate === S04_DEFAULT_SELECTION.suretyRate &&
+    selection.guaranteeMode === S04_DEFAULT_SELECTION.guaranteeMode &&
+    selection.hydrocarbonBenefit === S04_DEFAULT_SELECTION.hydrocarbonBenefit &&
+    selection.optional475 === S04_DEFAULT_SELECTION.optional475;
 
   return {
-    scenarioKey: `F${String(selection.fronts).padStart(2, "0")}-${selection.technical}-${selection.acquisition}`,
     selection,
-    counts,
-    assets,
-    financials: financials(selection, assets.length),
-    assumptions,
+    scenarioLabel: scenarioLabel(selection),
+    sourceBadge: sourceBadge(selection, economics),
+    benchmark2F: benchmark2F(selection.dso),
+    economics,
+    physical: physicalView(selection),
+    fundingBridge: isDefaultFundingBridge ? S04_DEFAULT_FUNDING_BRIDGE.map((item) => ({ ...item })) : [],
+    assumptions: [
+      { label: "Customs Mode", value: selection.customsMode, status: selection.customsMode === "TEMPORARY_ADMISSION" ? "EWERT PRACTICE / PENDING CUSTOMS VALIDATION" : "STRESS / PENDING S04 RESOLUTION" },
+      { label: "Customs Value Factor", value: selection.customsValueFactor === "CUSTOM" ? "CUSTOM" : `${Number(selection.customsValueFactor) * 100}%`, status: selection.customsValueFactor === 0.65 ? "EWERT PRACTICE / PENDING CUSTOMS VALIDATION" : "SCHEMA VALID / UNRESOLVED ECONOMICS" },
+      { label: "Surety", value: selection.suretyRate === "CUSTOM" ? "CUSTOM" : `${Number(selection.suretyRate) * 100}%`, status: selection.suretyRate === 0.02 ? "P50" : "SENSITIVITY" },
+      { label: "Guarantee", value: selection.guaranteeMode, status: selection.guaranteeMode === "SURETY_BOND" ? "BASE" : "STRESS / CUSTOM" },
+      { label: "Hydrocarbon Benefit", value: selection.hydrocarbonBenefit, status: selection.hydrocarbonBenefit === "OFF" ? "NO ECONOMIC CREDIT" : "PENDING FORMAL VALIDATION" },
+      { label: "Optional 4¾", value: selection.optional475, status: selection.optional475 === "NO" ? "OFF / BASE" : "OPTIONAL CAPABILITY · USD 179,603 KNOWN CAPEX · LOGISTICS/CUSTOMS PENDING" },
+      { label: "Leasing", value: selection.acquisition, status: selection.acquisition === "PURCHASE" ? "PURCHASE RESOLVED" : "PENDING LEASING TERMS" },
+      { label: "Austral Asset Credit", value: "USD 0 confirmed", status: "0 CONFIRMED BY CURRENT EVIDENCE — NOT ZERO ASSETS OWNED" },
+      { label: "LIH", value: S04_LIH_BASIS, status: "USD 78,000 desfase without event · zero liquidity effect absent event" },
+      { label: "Service contract preparation", value: "30–60 days", status: "MANAGEMENT TIMING ASSUMPTION / NOT EWERT CONTRACTUAL TERMS" },
+      { label: "Spares", value: "AFE startup spares included", status: "USD 55k/well recurring OPEX preserved · replenishment reconciliation pending" },
+    ],
     reconciliation: {
-      requiredSets: counts.totalSets,
-      allocatedAssets: assets.length,
-      setCountMatches: counts.totalSets === assets.length,
-      backupCoverageValid: backupCoverageValid(assets, selection.fronts),
-      acquisitionBalanceValid,
-      economicsReconciled: false,
-      note: "Physical fleet is derived only from S01/S04 rules. Economic reconciliation remains gated by normalized S02 AFE and S03 outputs.",
+      computationalUiReconciliation: economics.status === "RESOLVED" ? "PASS" : "PENDING",
+      physicalSource: selection.technical === "EWERT_LEAN" ? "S01_S02" : "CONCEPTUAL",
+      economicsSource: "S04_HANDOFF",
+      noIndependentEconomicFormula: true,
+      noKitDoubleCount: true,
+      lihBasis: "NBV",
+      optional475DefaultOff: true,
+      grossFundingNotEquity: true,
+      australCreditLabelSafe: true,
+      note: economics.status === "RESOLVED"
+        ? "Selected economics are an exact S04 Rev1 machine-handoff lookup."
+        : "Selector is accepted, but S05 intentionally withholds unresolved economics instead of calculating a second model."
     },
     canonicalRefs: [
-      "DDS-S01 — Technical Rebase / BHA Architecture",
-      "DDS-S02 — Ewert AFE / Asset Gap / Leasing",
-      "DDS-S03 — Financial Model 24M Rebase",
-      "DDS-S04 — Scenario Engine + Excel Selector",
+      "S01 — DDS Equipment Architecture v2.1 / EWERT AFE REV0 RECONCILED",
+      "S02 — AFE normalized / Asset Register / 2F Base",
+      "S04 — DDS Scenario Engine Rev1 S05 Machine Handoff CANDIDATE 2026-10-03",
     ],
   };
+}
+
+export function defaultScenarioSelection(): ScenarioSelection {
+  return { ...S04_DEFAULT_SELECTION };
 }
