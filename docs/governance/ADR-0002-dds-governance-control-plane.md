@@ -1,7 +1,7 @@
 # ADR-0002 — DDS Venezuela governance control plane
 
-- Status: Proposed for Manuel approval
-- Date: 2026-10-02
+- Status: Rev1 release candidate / proposed for Manuel approval
+- Date: 2026-10-03
 - Oreshnik anchor: Cerberux77/oreshnik#233
 - Implementation branch: `run/dds-s06-governance-01`
 
@@ -86,8 +86,10 @@ A missing hash is explicit evidence, not an invented value. A file that appears 
 ## Lifecycle policy
 
 - **CURRENT** — the sole active baseline for a document type. Replacing it is a material promotion and requires Manuel approval.
-- **APPROVED** — approved artifact or release candidate that is not the active baseline.
+- **APPROVED** — approved artifact that is not the active baseline.
+- **CANDIDATE** — supplier/model/release candidate that is traceable but cannot replace CURRENT without promotion.
 - **DRAFT** — work in progress; never substitutes CURRENT.
+- **BLOCKED_EXTERNAL** — resolution requires external evidence or authorization; unresolved values cannot be represented as approved economics.
 - **SUPERSEDED** — previously valid but replaced; read-only historical evidence.
 - **ARCHIVE** — historical/non-operational material; excluded from active navigation and model ingestion.
 
@@ -177,4 +179,31 @@ Trade-offs:
 
 - A whitelist requires maintenance.
 - Hashing may remain pending when the connected Drive surface does not expose a checksum.
-- S01–S05 computational outputs must be integrated into the computational domain before S06 can calculate a real AFE financial delta automatically.
+- S01–S05 Rev1 now have a traceable Drive/Git evidence chain, but S03/S04 final spreadsheet persistence gates and S05 visual-access QA remain open.
+- A supplier 3F Rev0 AFE arrived after the current S04/S05 handoffs; S06 records it as a CANDIDATE and opens G12 rather than mutating downstream controls silently.
+
+
+## Rev1 rebase amendment — 2026-10-03
+
+S06 now governs the actual S01→S05 rebase:
+
+`SOURCE → NORMALIZATION → TECHNICAL RULE → ECONOMIC MODEL → SCENARIO ENGINE → UI → QA → APPROVAL → RELEASE`.
+
+Rev1 adds explicit locks for:
+
+- `LIH_BASIS_LOCK = NBV`; non-NBV basis requires MANUAL_DECISION_GATE.
+- USD 22.960556M wording = **GROSS PEAK FUNDING REQUIREMENT**, not Required Equity.
+- leasing remains `PENDING_EXTERNAL/PENDING_LEASING` until complete provider terms exist.
+- 65% customs factor remains `PENDING_CUSTOMS_VALIDATION`, not legal/tax authority.
+- Austral wording is “0 confirmed asset contribution in current evidence,” not a zero-ownership claim.
+- S03/S04 machine computations may remain usable while spreadsheet artifact-persistence gates are open, but the financial artifact cannot become fully APPROVED.
+- S05 production release requires authorized visual QA or an explicit Manuel waiver plus separate release approval.
+- PR merge itself is a Manuel gate.
+
+### New supplier 3F source
+
+A 2026-10-03 supplier AFE for three simultaneous jobs is now monitored as CANDIDATE. It reports USD 9,590,365 gross with resistivity and USD 9,410,762 excluding optional 4¾ capability. The current S04 3F control remains USD 10,283,636 MODEL_DERIVED until G12 normalization/reconciliation is completed. No automatic downstream rewrite is permitted.
+
+### Repository topology
+
+The verified current topology remains one application repository, `Cerberux77/DDS-VEN`, containing both computational and presentation domains. PR #7’s S05 presentation boundary is logical, not evidence that a separate deal-room repository currently exists. A future split remains conditional on the criteria above.
