@@ -61,3 +61,30 @@ The repository currently contains both the controlled deal-room presentation lay
 The client does not import the scenario core and does not calculate backup counts, CAPEX, funding or lease economics. S02 AFE values and S03 reconciled financial outputs are represented as explicit pending states until they are available. HYBRID 18M/24M does not assume an owned/leased split because that asset-by-asset rule is not frozen.
 
 DDS-VEN is the current computational source and presentation/application repository. S05 is a logical presentation domain within DDS-VEN. A physical repository split requires the independent deployment/access/interface criteria in ADR-0002 and is not part of this release.
+
+
+## Rev2 G12 architecture — partner contribution / liquid cash
+
+The 2026-10-03 G12 delta has now been reconciled into a **CANDIDATE Rev2** path. It does not silently promote Drive CURRENT artifacts.
+
+Rev2 computational flow:
+
+`Ewert 3 Jobs AFE → line-item partner contribution classification → S03 Rev2 cash-ramp workbook → lib/dds/s04-rev2-engine.ts → authenticated scenario API → S05 Rev2 presentation`.
+
+Key internal boundaries:
+
+- `lib/dds/ewert-lean-3f-data.ts`: supplier-backed 3F physical fleet / partner cash-treatment view.
+- `lib/dds/s04-rev2-engine.ts`: canonical server-side Rev2 liquidity/scenario resolver.
+- `lib/dds/scenario-engine.ts`: server-only export boundary.
+- `components/FleetConfigurator.tsx`: presentation only; section-length sliders post inputs to the authenticated API and never calculate economics in the browser.
+- growth beyond supplier-backed 3F intentionally resolves to `PENDING_S04_RESOLUTION` until partner-contribution scaling is rebuilt.
+
+The current management base is 3F-capable / 2F-active. PR2 6¾ is an Austral/Ewert in-kind startup contribution; PR2 8¼ is Panthers-funded on a 50% M0 / 50% M6 schedule. The old Rev1 zero-contribution / 3→10 gross-purchase funding headline is retained only as historical evidence and is not a Rev2 management output.
+
+Governance authority for this delta is documented in:
+
+- `data/governance/rebase-controls.rev2.json`
+- `data/governance/open-gates.rev2.json`
+- `data/governance/executive-release-matrix.rev2.json`
+- `docs/governance/DDS_GOVERNANCE_REV2.md`
+- `docs/governance/TRANSVERSAL_AUDIT_INPUT_PACK_REV2.md`
