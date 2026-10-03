@@ -113,12 +113,17 @@ S06 is technically ready for Manuel review when CI is green. The recommendation 
 
 ## Readiness
 
-- GOVERNANCE_IMPLEMENTATION: candidate PASS subject to final Rev1 CI.
+- GOVERNANCE_IMPLEMENTATION: PASS.
 - EVIDENCE_CHAIN: PASS with G12 newly opened.
-- PR6_STATUS: DRAFT / NOT MERGED.
+- PR6_STATUS: DRAFT_READY_FOR_MANUEL_REVIEW / NOT MERGED.
 - PR7_DEPENDENCY: REBASE_AFTER_PR6_MERGE.
 - S03_XLSX_GATE: OPEN.
 - S04_EXCEL_GATE: OPEN.
 - S05_VISUAL_GATE: OPEN_ACCESS_GATE.
 - EXTERNAL_PRESENTATION_READINESS: READY_AS_MANAGEMENT_DRAFT_WITH_DISCLOSED_GATES.
 - TRANSVERSAL_AUDIT_READINESS: READY.
+
+
+## Rev1 CI evidence
+
+GitHub Actions run #51 completed SUCCESS on the Rev1 branch content: governance configuration gate, policy/source-boundary tests, typecheck and production build all passed. Vercel commit status also reported SUCCESS. A final status-only commit is revalidated before handoff.
