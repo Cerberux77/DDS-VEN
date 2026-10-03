@@ -47,3 +47,18 @@ Set `ACCESS_NOTIFICATION_WEBHOOK` to a private server endpoint to receive LOGIN/
 ## Progressive release administration
 
 `POST /api/admin/grants` is restricted to an authenticated `ADMIN`. It can raise or lower a user's explicit document grant without a deployment. If a `milestoneCode` is supplied, that milestone must already be marked satisfied. A broad user grant still cannot exceed the document's own release state.
+
+
+## DDS-S06 governance layer
+
+Cross-system change governance is defined by `docs/governance/ADR-0002-dds-governance-control-plane.md`.
+
+Key invariants:
+
+- Google Drive remains the source of truth for commercial/documental originals.
+- Drive ingestion is whitelist-based; folder membership or recency never promotes a file automatically.
+- `CURRENT` baseline replacement requires an explicit Manuel approval gate.
+- Model-affecting changes require normalization, tests and financial reconciliation before release.
+- Mantis identity rules are consumed from `config/brand/smsmantis.tokens.json`; the complete manual stays in Drive.
+- Economic, legal, contract, AFE and partner-commitment Gmail messages may be drafted automatically but may not be sent without explicit Manuel approval.
+- Oreshnik governance anchor for S06: `Cerberux77/oreshnik#233`.

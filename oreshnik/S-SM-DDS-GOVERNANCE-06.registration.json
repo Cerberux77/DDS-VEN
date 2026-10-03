@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "taskId": "S-SM-DDS-GOVERNANCE-06",
+  "task": {
+    "id": "S-SM-DDS-GOVERNANCE-06",
+    "title": "DDS Venezuela Drive/GitHub/Oreshnik/Gmail governance",
+    "owner": "manuel",
+    "backupOwner": "jean",
+    "status": "active",
+    "track": "DDS-S06",
+    "zone": [
+      "config/governance/**",
+      "config/brand/**",
+      "data/governance/**",
+      "docs/governance/**",
+      "lib/governance/**",
+      "schemas/governance/**",
+      "tests/governance-policy.test.ts",
+      "oreshnik/S-SM-DDS-GOVERNANCE-06.registration.json"
+    ],
+    "resources": [
+      "github:Cerberux77/DDS-VEN",
+      "github:Cerberux77/DDS-VEN#6",
+      "github:Cerberux77/DDS-VEN#7",
+      "github:Cerberux77/oreshnik#233",
+      "drive:1sL7cbKiTtaUi6UXKsoYhVgwQ3kqxst3N",
+      "drive:1O53IiybqYo7P7n138CcxJEG79yqLA1fu",
+      "drive:10jEXZx_7Gf36LVgW_C6ED9zoRUtvmcjc",
+      "drive:1wNgF8dFn6XV67hbLzTBPzhvn_UNA34P3",
+      "drive:1MKOm9Unay6CDSoFh6oMgIk1DW4AXK7vZ",
+      "drive:1GL0O14W6Z8_5wRyzinaf5lMMxSn5ltBLQO9myjCguI8"
+    ],
+    "dependsOn": [
+      "DDS-S01",
+      "DDS-S02",
+      "DDS-S03",
+      "DDS-S04",
+      "DDS-S05"
+    ],
+    "acceptance": [
+      "Unlisted or CANDIDATE Drive files cannot silently replace CURRENT",
+      "CANDIDATE, DRAFT, BLOCKED_EXTERNAL, SUPERSEDED and ARCHIVE are fail-closed for baseline replacement",
+      "Model-affecting changes require normalization, tests and financial reconciliation",
+      "LIH remains NBV unless MANUAL_DECISION_GATE is explicitly approved",
+      "Gross Peak Funding cannot be represented as Required Equity without a later financing decision",
+      "Pending leasing/customs cannot emit approved resolved economics",
+      "Austral evidence wording cannot be converted into a zero-owned-assets claim",
+      "S03/S04 artifact-persistence and S05 visual QA gates remain visible",
+      "PR merge and production release require explicit Manuel approval",
+      "Sensitive outbound Gmail sends require explicit Manuel approval",
+      "New supplier 3F Rev0 AFE remains CANDIDATE until G12 reconciliation",
+      "CI must pass before Manuel review"
+    ]
+  },
+  "goalMarkdown": "# DDS-S06 Rev1\n\nGovern the actual S01→S05 economic/technical rebase through a fail-closed SOURCE→NORMALIZATION→TECHNICAL RULE→ECONOMIC MODEL→SCENARIO ENGINE→UI→QA→APPROVAL→RELEASE chain. Preserve Manuel approval for material baseline changes, PR merge/release, and sensitive outbound communication. Register the new supplier 3F Rev0 AFE as CANDIDATE/G12 without silently changing current S04/S05 controls.",
+  "registeredBy": "manuel",
+  "registeredAt": "2026-10-02T14:40:16Z",
+  "canonicalRepository": "Cerberux77/DDS-VEN",
+  "governanceAnchor": "Cerberux77/oreshnik#233",
+  "activeBranch": "run/dds-s06-governance-01",
+  "revision": "DDS Governance Rev1 — Economic & Technical Rebase Release Candidate",
+  "openGatesRegister": "data/governance/open-gates.rev1.json",
+  "evidenceManifest": "data/governance/evidence-manifest-s01-s05.rev1.json",
+  "integrationPlan": "docs/governance/PR_INTEGRATION_PLAN_6_TO_7.md"
+}

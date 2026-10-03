@@ -1,0 +1,36 @@
+{
+  "eventId": "DDS-S06-2026-10-03-AFE-3F-REV0",
+  "detectedAt": "2026-10-03T04:27:43Z",
+  "source": {
+    "system": "GMAIL_TO_DRIVE",
+    "sender": "Ewert Munoz / Austral",
+    "artifact": "DDS Equipment_ 3 Jobs_Rev0.xlsx",
+    "driveFileId": "10jEXZx_7Gf36LVgW_C6ED9zoRUtvmcjc"
+  },
+  "changeType": "ADDED",
+  "lifecycle": "CANDIDATE",
+  "sourceStatus": "SUPPLIER_BACKED",
+  "whatChanged": [
+    "Supplier provided a 3 simultaneous jobs Rev0 AFE after S04/S05 current candidate handoffs.",
+    "Supplier email states three simultaneous jobs with backups kept in nearby locations.",
+    "AFE gross with resistivity is USD 9,590,365.",
+    "Optional 4¾ capability totals USD 179,603; required 3F base excluding it is USD 9,410,762.",
+    "Current S04 3F equipment control is USD 10,283,636 MODEL_DERIVED; supplier candidate is USD 872,874 lower."
+  ],
+  "financialImpact": "RECALCULATION_REQUIRED",
+  "affectedOutputs": [
+    "S02 3F normalized asset register",
+    "S03 STATIC_3F",
+    "S03/S04 RAMP scaling",
+    "S04 scenario handoff",
+    "S05 3F/ramp views"
+  ],
+  "tests": [],
+  "approver": null,
+  "release": null,
+  "evidence": [
+    "source persisted in S02 Drive folder",
+    "NO_BASELINE_PROMOTION",
+    "G12 opened"
+  ]
+}

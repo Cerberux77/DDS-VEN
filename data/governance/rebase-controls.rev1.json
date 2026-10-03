@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "DDS Governance Rev1 — Economic & Technical Rebase Release Candidate",
+  "lifecycle": "CANDIDATE",
+  "communicationState": "INTERNAL_MANAGEMENT_DRAFT",
+  "canonicalEconomicControls": {
+    "AFE_REV0_GROSS": 6733889,
+    "OPTIONAL_4_75": 179603,
+    "REQUIRED_2F_BASE": 6554286,
+    "2F_PURCHASE_STARTUP_P50": 6789881.148,
+    "2F_PEAK_DSO45": 7502982.579450832,
+    "2F_PEAK_DSO60": 7802982.579450832,
+    "2F_PEAK_DSO90": 8144427.045176248,
+    "3F_EQUIPMENT_PROJECTED": 10283636,
+    "10F_EQUIPMENT_MODEL_DERIVED": 30398086,
+    "RAMP_PEAK_DSO45": 19253216.92581714,
+    "RAMP_PEAK_DSO60": 20453216.925817143,
+    "RAMP_PEAK_DSO90": 22960556.247195095,
+    "RAMP_TARGET_FUNDING_CAPACITY_DSO90": 23134273.434695095,
+    "2F_FCF_24M": 4405332.822590001,
+    "RAMP_FCF_24M": -2754127.172319226
+  },
+  "locks": {
+    "LIH_BASIS_LOCK": "NBV",
+    "LIH_DESFASE_WITHOUT_EVENT": 78000,
+    "LIH_LIQUIDITY_EFFECT_WITHOUT_EVENT": 0,
+    "GROSS_PEAK_FUNDING_LABEL": "GROSS PEAK FUNDING REQUIREMENT",
+    "prohibitedGrossFundingLabels": [
+      "Required Equity",
+      "Equity Raise Required"
+    ],
+    "AUSTRAL_ASSET_WORDING": "0 confirmed asset contribution in current evidence.",
+    "HYDROCARBON_BENEFIT_DEFAULT": "OFF"
+  },
+  "workingAssumptions": {
+    "customsMode": "TEMPORARY_ADMISSION",
+    "customsValueFactor": 0.65,
+    "customsStatus": "PENDING_CUSTOMS_VALIDATION",
+    "suretyRange": [
+      0.01,
+      0.03
+    ],
+    "suretyP50": 0.02,
+    "leasingStatus": "PENDING_EXTERNAL",
+    "purchaseStatus": "ACTIONABLE_MANAGEMENT_DRAFT"
+  },
+  "newSupplier3FCandidate": {
+    "grossWithResistivity": 9590365,
+    "optional475": 179603,
+    "requiredBaseExcludingOptional475": 9410762,
+    "priorModelDerived3F": 10283636,
+    "deltaVsPriorModelDerived": -872874,
+    "deltaPctVsPriorModelDerived": -0.08487993072079546,
+    "status": "CANDIDATE",
+    "financialImpact": "RECALCULATION_REQUIRED"
+  }
+}

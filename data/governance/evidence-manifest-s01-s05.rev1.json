@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "version": "DDS Governance Rev1",
+  "generatedAt": "2026-10-03",
+  "chain": [
+    {
+      "stage": "SOURCE",
+      "artifact": "DDS Minimum Equipment_ 2 Jobs_Rev0.xlsx",
+      "version": "Rev0",
+      "driveFileId": "1O53IiybqYo7P7n138CcxJEG79yqLA1fu",
+      "sourceStatus": "SUPPLIER_BACKED",
+      "lifecycle": "CURRENT",
+      "qaStatus": "PARSED_AND_RECONCILED_S02",
+      "approvalState": "SOURCE_ACCEPTED_NOT_RELEASE_APPROVAL",
+      "openGates": [
+        "G01",
+        "G02",
+        "G03",
+        "G11"
+      ]
+    },
+    {
+      "stage": "SOURCE",
+      "artifact": "DDS Equipment_ 3 Jobs_Rev0.xlsx",
+      "version": "Rev0",
+      "driveFileId": "10jEXZx_7Gf36LVgW_C6ED9zoRUtvmcjc",
+      "sourceStatus": "SUPPLIER_BACKED_NEW",
+      "lifecycle": "CANDIDATE",
+      "qaStatus": "PARSED_NOT_YET_DOWNSTREAM_RECONCILED",
+      "approvalState": "NOT_PROMOTED",
+      "openGates": [
+        "G12"
+      ]
+    },
+    {
+      "stage": "NORMALIZATION",
+      "artifact": "DDS_S02_Rev0_AFE_Asset_Gap_Leasing_CANDIDATE_2026-10-02.xlsx",
+      "version": "S02 Rev0",
+      "driveFileId": "1Yl4drlyNex8Vq91xnT4WpGOpc0xp4Rh8",
+      "sourceStatus": "NORMALIZED_FROM_2F_AFE",
+      "lifecycle": "CANDIDATE",
+      "qaStatus": "RECONCILED_2F_PURCHASE_CASE",
+      "approvalState": "CANDIDATE",
+      "openGates": [
+        "G01",
+        "G02",
+        "G03"
+      ]
+    },
+    {
+      "stage": "TECHNICAL_RULE",
+      "artifact": "DDS Equipment Architecture v2.1",
+      "version": "v2.1",
+      "driveFileId": "1fF7cOmGVHMN9FdfPJe73ap9IQqgINc2_7khsbXJhzss",
+      "sourceStatus": "S01_RECONCILED",
+      "lifecycle": "CANDIDATE",
+      "qaStatus": "EWERT_LEAN_RECONCILED",
+      "approvalState": "CANDIDATE",
+      "openGates": []
+    },
+    {
+      "stage": "ECONOMIC_MODEL",
+      "artifact": "DDS_S03_Rev1_Reconciliation_Report_CANDIDATE_2026-10-02.md",
+      "version": "S03 Rev1",
+      "driveFileId": "1wNgF8dFn6XV67hbLzTBPzhvn_UNA34P3",
+      "sourceStatus": "COMPUTATION_VALID",
+      "lifecycle": "CANDIDATE",
+      "qaStatus": "18_CONTROLS_PASS_OR_PASS_WITH_OPEN_GATE",
+      "approvalState": "ARTIFACT_PERSISTENCE_OPEN",
+      "openGates": [
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G12"
+      ]
+    },
+    {
+      "stage": "SCENARIO_ENGINE",
+      "artifact": "DDS_S04_Rev1_S05_Machine_Handoff_CANDIDATE_2026-10-03.zip",
+      "version": "S04 Rev1",
+      "driveFileId": "1MKOm9Unay6CDSoFh6oMgIk1DW4AXK7vZ",
+      "sourceStatus": "COMPUTATIONAL_READY",
+      "lifecycle": "CANDIDATE",
+      "qaStatus": "20/20_QA_PASS",
+      "approvalState": "EXCEL_PERSISTENCE_OPEN",
+      "openGates": [
+        "G09",
+        "G12"
+      ]
+    },
+    {
+      "stage": "UI",
+      "artifact": "S05 — HTML Visual Fleet Configurator Rev1",
+      "version": "S05 Rev1",
+      "gitSha": "3b0f1739a1208548e5759264824c02494bab5248",
+      "pr": 7,
+      "driveFileId": "1GL0O14W6Z8_5wRyzinaf5lMMxSn5ltBLQO9myjCguI8",
+      "sourceStatus": "LOOKUP_ONLY_NO_SECOND_ENGINE",
+      "lifecycle": "CANDIDATE",
+      "qaStatus": "CI_SUCCESS_COMPUTATIONAL_UI_RECONCILIATION_PASS",
+      "approvalState": "DRAFT_NOT_MERGED",
+      "openGates": [
+        "G10",
+        "G12"
+      ]
+    },
+    {
+      "stage": "GOVERNANCE",
+      "artifact": "DDS-S06",
+      "version": "Rev1",
+      "pr": 6,
+      "sourceStatus": "CONTROL_PLANE_DELTA",
+      "lifecycle": "CANDIDATE",
+      "qaStatus": "CI_RUN_52_SUCCESS",
+      "approvalState": "DRAFT_NOT_MERGED",
+      "openGates": [
+        "MANUEL_MERGE_APPROVAL"
+      ],
+      "driveArtifacts": [
+        {
+          "name": "DDS Governance Rev1 Release Control Package",
+          "driveFileId": "1NUeprqe69umdxSCTlqCo1Bf8Fjc9scQniirK9CAqaWI",
+          "lifecycle": "CANDIDATE"
+        },
+        {
+          "name": "Open Gates Register Rev1",
+          "driveFileId": "19MZo2QSwLmpH1AMKB_8aZtDxAlfVVnIdnihIT__t4aQ",
+          "lifecycle": "CANDIDATE"
+        },
+        {
+          "name": "Rebase Navigable Index Rev1",
+          "driveFileId": "1TpZOPdP2jEJsZ1jM8xtUOu7A8ouLrzPIbWqREquKEkM",
+          "lifecycle": "CANDIDATE"
+        },
+        {
+          "name": "Final Transversal Audit Input Pack",
+          "driveFileId": "1_oRZVcnHxuGnGyerdaUZli6AoH670Z8zLqZb7SjqwX4",
+          "lifecycle": "CANDIDATE"
+        }
+      ],
+      "gitHeadAtDrivePersistence": "2589735ac5503dce56f97330e8133cf5ea2f21d7"
+    }
+  ],
+  "sourcePractices": [
+    {
+      "fact": "4¾ is optional contingency capability and may be excluded from base calculations",
+      "classification": "CONFIRMED_EWERT_PRACTICE",
+      "sourceChannel": "WHATSAPP_REPORTED_BY_MANUEL",
+      "promotion": "technical working rule; source artifact not available through connected systems"
+    },
+    {
+      "fact": "Temporary Admission / container logistics / surety 1–3% / customs value factor ~65%",
+      "classification": "CONFIRMED_EWERT_PRACTICE / PENDING_CUSTOMS_VALIDATION",
+      "promotion": "not a legal or canonical customs rule"
+    },
+    {
+      "fact": "service-contract preparation 30–60 days",
+      "classification": "CONFIRMED_EWERT_PRACTICE",
+      "promotion": "timing risk until contractual schedule exists"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.smsmantis.local/schemas/governance/change-evidence.schema.json",
+  "title": "DDS Governance Change Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "eventId",
+    "detectedAt",
+    "source",
+    "changeType",
+    "whatChanged",
+    "financialImpact",
+    "affectedOutputs",
+    "tests",
+    "approver",
+    "release",
+    "evidence"
+  ],
+  "properties": {
+    "eventId": { "type": "string", "minLength": 1 },
+    "detectedAt": { "type": "string", "format": "date-time" },
+    "source": { "type": "object" },
+    "changeType": { "enum": ["ADDED", "MODIFIED", "REMOVED", "UNCHANGED"] },
+    "whatChanged": { "type": "array", "items": { "type": "string" } },
+    "financialImpact": {
+      "enum": ["NONE", "UNKNOWN_PENDING_DIFF", "RECALCULATION_REQUIRED", "CALCULATED"]
+    },
+    "affectedOutputs": { "type": "array", "items": { "type": "string" } },
+    "tests": { "type": "array", "items": { "type": "object" } },
+    "approver": { "type": ["object", "null"] },
+    "release": { "type": ["object", "null"] },
+    "evidence": { "type": "array", "items": { "type": "string" } }
+  }
+}

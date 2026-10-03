@@ -9,7 +9,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
-    "verify": "npm run typecheck && npm run test && npm run build"
+    "verify": "npm run governance:check && npm run typecheck && npm run test && npm run build",
+    "governance:check": "node scripts/governance/check-config.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "version": "Rev1",
+  "communicationState": "INTERNAL_MANAGEMENT_DRAFT",
+  "statements": [
+    {
+      "statement": "AFE Rev0 Gross = USD 6,733,889",
+      "classification": "SAFE_TO_PRESENT",
+      "basis": "supplier-backed 2F Rev0 AFE"
+    },
+    {
+      "statement": "Required 2F Base = USD 6,554,286",
+      "classification": "SAFE_TO_PRESENT",
+      "basis": "supplier-backed gross less optional 4¾ USD179,603; explain exclusion"
+    },
+    {
+      "statement": "2F Peak Funding DSO90 = USD 8,144,427",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "management timing/customs assumptions; gross purchase case"
+    },
+    {
+      "statement": "Ramp Gross Peak Funding DSO90 = USD 22,960,556",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "model-derived gross purchase capacity; zero confirmed asset contribution credit; not Required Equity"
+    },
+    {
+      "statement": "Ramp Target Funding Capacity DSO90 = USD 23,134,273",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "gross peak plus liquidity floor; financing structure not decided"
+    },
+    {
+      "statement": "Leasing 18M/24M economics",
+      "classification": "BLOCKED",
+      "basis": "commercial terms pending external provider"
+    },
+    {
+      "statement": "65% customs value factor",
+      "classification": "INTERNAL_ONLY",
+      "basis": "reported Ewert practice; pending formal customs/legal validation"
+    },
+    {
+      "statement": "Austral asset contribution = 0 confirmed in current evidence",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "does not mean Austral owns zero assets; net funding remains open"
+    },
+    {
+      "statement": "3F supplier AFE Rev0 gross = USD 9,590,365",
+      "classification": "INTERNAL_ONLY",
+      "basis": "new supplier-backed candidate received 2026-10-03; downstream normalization/reconciliation G12 open"
+    },
+    {
+      "statement": "Current 3F model-derived equipment = USD 10,283,636",
+      "classification": "INTERNAL_ONLY",
+      "basis": "control remains active for current handoff but must be reconciled to new supplier 3F AFE before further promotion"
+    }
+  ]
+}

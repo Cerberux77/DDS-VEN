@@ -1,0 +1,41 @@
+{
+  "eventId": "DDS-S06-PILOT-2026-10-02-S03-BACKUP",
+  "detectedAt": "2026-10-02T14:36:04.960Z",
+  "source": {
+    "system": "GOOGLE_DRIVE",
+    "candidateDriveFileId": "1DvzaNgcCziA349smoo3kOuoxRNtMZyd4",
+    "candidatePath": "/05_Modelo_Financiero_y_Reuniones_Fase_2/BACKUP_S03_DDS_Modelo_AC_BLIND_2026-10-02_1034.xlsx",
+    "currentDriveFileId": "1fIxd_817m3KMGE892IQd4lqg-hQodsme",
+    "currentPath": "/05_Modelo_Financiero_y_Reuniones_Fase_2/DDS_Modelo_AC_BLIND.xlsx"
+  },
+  "changeType": "ADDED",
+  "whatChanged": [
+    "A new S03 backup workbook appeared in the active Phase 2 financial-model folder.",
+    "The canonical workbook remains a separate Drive file and was not replaced.",
+    "Drive connector extracted content for both workbooks had equal length (86042 characters) and no detected extracted-content difference.",
+    "Byte-level identity is not asserted because the connected metadata surface did not expose a checksum."
+  ],
+  "financialImpact": "UNKNOWN_PENDING_DIFF",
+  "affectedOutputs": [],
+  "tests": [
+    {
+      "name": "lifecycle promotion",
+      "expected": "DRAFT cannot replace CURRENT",
+      "status": "PASS_BY_POLICY"
+    },
+    {
+      "name": "semantic extracted-content comparison",
+      "expected": "no detected workbook-content delta",
+      "status": "PASS_OBSERVED"
+    }
+  ],
+  "approver": null,
+  "release": null,
+  "evidence": [
+    "Drive candidate modified_time=2026-10-02T14:36:04.960Z",
+    "Drive canonical modified_time=2026-10-01T08:53:40.185Z",
+    "candidate lifecycle=DRAFT",
+    "candidate gitPolicy=DO_NOT_COPY",
+    "decision=NO_BASELINE_PROMOTION"
+  ]
+}
