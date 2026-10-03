@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "version": "DDS Governance Rev1 — Economic & Technical Rebase Release Candidate",
+  "lifecycle": "CANDIDATE",
+  "generatedAt": "2026-10-03",
+  "sourceOfTruth": {
+    "documentaryCommercial": "GOOGLE_DRIVE",
+    "computationalAndPresentation": "Cerberux77/DDS-VEN",
+    "controlPlane": "Cerberux77/oreshnik#233",
+    "externalCommunication": "GMAIL"
+  },
+  "stages": {
+    "S01": {
+      "status": "DELTA_COMPLETE",
+      "authority": "DDS Equipment Architecture v2.1 / EWERT_LEAN reconciled"
+    },
+    "S02": {
+      "status": "DELTA_COMPLETE_WITH_NEW_3F_CANDIDATE",
+      "twoFrontGross": 6733889,
+      "twoFrontRequiredBase": 6554286,
+      "newThreeFrontGrossCandidate": 9590365,
+      "newThreeFrontRequiredBaseCandidate": 9410762,
+      "gate": "G12"
+    },
+    "S03": {
+      "status": "COMPUTATION_COMPLETE",
+      "artifactStatus": "XLSX_OPEN_GATE",
+      "gate": "G08"
+    },
+    "S04": {
+      "status": "COMPUTATION_COMPLETE",
+      "qa": "20/20_PASS",
+      "artifactStatus": "EXCEL_OPEN_GATE",
+      "gate": "G09"
+    },
+    "S05": {
+      "status": "CANDIDATE_COMPLETE",
+      "pr": 7,
+      "head": "3b0f1739a1208548e5759264824c02494bab5248",
+      "ci": "SUCCESS",
+      "visualQa": "OPEN_ACCESS_GATE",
+      "gate": "G10"
+    },
+    "S06": {
+      "status": "REV1_IMPLEMENTED_PENDING_FINAL_CI_AND_MANUEL_REVIEW",
+      "pr": 6,
+      "branch": "run/dds-s06-governance-01",
+      "headResolution": "USE_LIVE_PR6_HEAD_AT_REVIEW"
+    }
+  },
+  "canonicalControlsFile": "data/governance/rebase-controls.rev1.json",
+  "evidenceManifest": "data/governance/evidence-manifest-s01-s05.rev1.json",
+  "openGates": "data/governance/open-gates.rev1.json",
+  "releaseMatrix": "data/governance/executive-release-matrix.rev1.json",
+  "architectureMergePlan": "docs/governance/ARCHITECTURE_MERGE_PLAN.md",
+  "integrationPlan": "docs/governance/PR_INTEGRATION_PLAN_6_TO_7.md",
+  "communicationState": "INTERNAL_MANAGEMENT_DRAFT",
+  "integrationOrder": [
+    "PR6_MANUEL_REVIEW",
+    "PR6_MERGE_ONLY_AFTER_APPROVAL",
+    "PR7_REBASE_ON_NEW_MAIN",
+    "ARCHITECTURE_DELiberate_COMPOSITION",
+    "PR7_FULL_CI",
+    "S05_VISUAL_QA_OR_APPROVED_WAIVER",
+    "PR7_MANUEL_APPROVAL",
+    "PR7_MERGE"
+  ],
+  "prohibitedActions": [
+    "AUTO_MERGE_PR6",
+    "AUTO_MERGE_PR7",
+    "PRODUCTION_RELEASE",
+    "SENSITIVE_AUTO_SEND",
+    "SILENT_3F_AFE_PROMOTION"
+  ],
+  "readiness": {
+    "GOVERNANCE_IMPLEMENTATION": "PENDING_FINAL_REV1_CI",
+    "EVIDENCE_CHAIN": "PASS",
+    "PR6_STATUS": "DRAFT_PENDING_FINAL_REV1_CI",
+    "PR7_DEPENDENCY": "REBASE_AFTER_PR6_MERGE",
+    "S03_XLSX_GATE": "OPEN",
+    "S04_EXCEL_GATE": "OPEN",
+    "S05_VISUAL_GATE": "OPEN_ACCESS_GATE",
+    "EXTERNAL_PRESENTATION_READINESS": "READY_AS_MANAGEMENT_DRAFT_WITH_DISCLOSED_GATES",
+    "TRANSVERSAL_AUDIT_READINESS": "READY"
+  }
+}
