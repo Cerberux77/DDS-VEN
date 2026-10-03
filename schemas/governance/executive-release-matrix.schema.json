@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.smsmantis.local/schemas/governance/executive-release-matrix.schema.json",
+  "title": "DDS Executive Release Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "version",
+    "communicationState",
+    "statements"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "version": {
+      "type": "string"
+    },
+    "communicationState": {
+      "enum": [
+        "INTERNAL_MANAGEMENT_DRAFT",
+        "EXTERNAL_PRESENTATION_READY"
+      ]
+    },
+    "statements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "statement",
+          "classification",
+          "basis"
+        ],
+        "properties": {
+          "statement": {
+            "type": "string"
+          },
+          "classification": {
+            "enum": [
+              "SAFE_TO_PRESENT",
+              "PRESENT_WITH_CAVEAT",
+              "INTERNAL_ONLY",
+              "BLOCKED"
+            ]
+          },
+          "basis": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
