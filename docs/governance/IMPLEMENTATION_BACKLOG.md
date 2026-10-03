@@ -1,54 +1,67 @@
-# DDS-S06 implementation backlog
+# DDS-S06 implementation backlog — Rev1
 
-## Implemented in branch
+## Implemented in PR #6
 
-- [x] Oreshnik anchor issue #233.
-- [x] Governed branch `run/dds-s06-governance-01`.
-- [x] Drive whitelist with explicit lifecycle and Git-copy policy.
-- [x] Executable baseline-promotion policy.
-- [x] Executable sensitive-outbound approval policy.
-- [x] Governance JSON schemas.
-- [x] Mantis identity tokens derived from approved manual v1.0.
-- [x] Unit tests for the S03 backup event, promotion gate and Gmail send gate.
-- [x] ADR and operating manual.
-- [x] Real Drive pilot evidence for 2026-10-02 S03 backup.
+- [x] Existing Oreshnik anchor #233 retained.
+- [x] Existing branch `run/dds-s06-governance-01` retained.
+- [x] No new repository and no new PR created.
+- [x] Rev1 source-of-truth map and source→release chain.
+- [x] Lifecycle extended with CANDIDATE and BLOCKED_EXTERNAL.
+- [x] Explicit baseline-promotion and PR-merge Manuel gates.
+- [x] Sensitive outbound send gate.
+- [x] LIH=NBV manual-decision lock.
+- [x] Gross Peak Funding wording lock.
+- [x] Leasing/customs/Austral evidence guards.
+- [x] S03/S04 artifact persistence and S05 visual release gates.
+- [x] Rev1 Drive whitelist.
+- [x] Evidence manifest S01→S05.
+- [x] Open Gates Register G01–G12.
+- [x] Executive Release Matrix.
+- [x] PR #6→#7 integration plan.
+- [x] ARCHITECTURE_MERGE_PLAN.
+- [x] New supplier 3F AFE detected, persisted to Drive and classified CANDIDATE.
+- [x] Final machine handoff and transversal audit input pack.
+- [x] Automated governance tests expanded.
 
-## P0 — integrate before automatic financial delta
+## Current candidate state
 
-- [ ] Land S01 technical architecture as canonical normalized configuration in DDS-VEN.
-- [ ] Land S02 normalized AFE/asset-gap/leasing inputs with explicit assumption provenance.
-- [ ] Land S03 24M financial engine in executable/testable form.
-- [ ] Land S04 scenario selector/configuration schema.
-- [ ] Land S05 visual configurator as a consumer of canonical outputs, not its own economics.
-- [ ] Wire a Drive detector to create Oreshnik runs from whitelisted changes.
-- [ ] Produce content hashes through a service account/API path that exposes checksum or controlled raw-byte hashing.
-- [ ] Implement normalized-input diff with field-level economic impact.
-- [ ] Bind model reconciliation output to a release manifest.
+- S01: delta complete / Architecture v2.1.
+- S02: 2F delta complete; new 3F AFE opens G12.
+- S03: computation complete; final Rev1 XLSX G08 open.
+- S04: computation complete / 20/20 QA; final Excel G09 open.
+- S05: PR #7 candidate complete / CI green; visual access G10 open.
+- S06: Rev1 implementation pending final CI and Manuel review.
 
-## P1 — release automation with human gates
+## P0 — gates that affect promotion/release
 
-- [ ] Add a release-manifest generator with source commit, source Drive versions, tests and affected outputs.
-- [ ] Add Oreshnik gate adapter for SOURCE_WHITELIST / MODEL_TESTS / FINANCIAL_RECONCILIATION / MANUEL_BASELINE_APPROVAL.
-- [ ] Add draft-only Gmail adapter that consumes approved release summaries.
-- [ ] Add explicit send gate evidence and fail-closed enforcement.
-- [ ] Add CI validation of governance JSON against schemas.
-- [ ] Add scheduled drift report for whitelist vs observed Drive metadata.
+- [ ] G01 obtain leasing provider terms.
+- [ ] G02 formal customs/legal validation.
+- [ ] G08 recover/persist/verify S03 Rev1 XLSX.
+- [ ] G09 recover/persist/verify S04 Rev1 Excel.
+- [ ] G10 authorized S05 visual QA or explicit approved waiver.
+- [ ] G12 normalize/reconcile new supplier 3F AFE through S02→S04 before changing 3F/ramp outputs.
+- [ ] Manuel review/approval of PR #6.
+- [ ] After PR #6 merge only: rebase PR #7 and resolve architecture composition.
+- [ ] Separate Manuel approval for PR #7/production release.
+
+## P1 — evidence needed for stronger economics
+
+- [ ] G03 Austral asset-level contribution schedule.
+- [ ] G04 spares consumption/replenishment bridge.
+- [ ] G05 support infrastructure scope.
+- [ ] G06 accounting classification.
+- [ ] G07 contract timing/payment schedule.
+- [ ] G11 final packing list.
 
 ## P2 — hardening
 
-- [ ] Separate service identities for Drive read, GitHub PR, and Gmail draft scopes.
-- [ ] Add immutable evidence retention policy.
-- [ ] Add secret scanning and dependency review.
-- [ ] Add branch protection / required checks for governance paths if not already configured.
-- [ ] Define repository-split criteria and migration contract only if an independent deal-room repository becomes operationally necessary.
+- [ ] Automated scheduled whitelist drift detection.
+- [ ] Controlled raw-byte hash capture for monitored Drive originals.
+- [ ] Schema validation package in CI beyond semantic config checks.
+- [ ] Separate least-privilege service identities where operationally justified.
+- [ ] Immutable evidence-retention policy.
+- [ ] Secret scanning/dependency review/required branch checks where not already enabled.
 
 ## Human-only actions
 
-The system must escalate rather than automate:
-
-- external credentials/consent;
-- material baseline approval;
-- contracts/legal acceptance;
-- partner/economic commitments;
-- final send of sensitive external communications;
-- business decisions where source data remains ambiguous.
+Never automate: material baseline promotion, PR merge approval, production release, legal/contract acceptance, material financing decisions, or final send of sensitive external communication.
