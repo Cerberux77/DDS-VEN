@@ -253,7 +253,7 @@ function resolveCashModel(selection: ScenarioSelection) {
       grossCollection,
       netCollection,
       accountsReceivable,
-      scheduledCash,
+      scheduledCash: capexAndPreop,
       operatingCashOut,
       netCashFlow,
       cumulativeCash,
