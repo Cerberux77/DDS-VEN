@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 2,
+  "version": "Rev2",
+  "communicationState": "INTERNAL_MANAGEMENT_DRAFT",
+  "statements": [
+    {
+      "statement": "3F supplier AFE Rev0 gross = USD 9,590,365",
+      "classification": "SAFE_TO_PRESENT",
+      "basis": "Ewert/Austral supplier-backed 3 Jobs Rev0"
+    },
+    {
+      "statement": "3F Required Base excluding optional 4¾ = USD 9,410,762",
+      "classification": "SAFE_TO_PRESENT",
+      "basis": "supplier gross less Ewert-confirmed optional 4¾ capability USD179,603"
+    },
+    {
+      "statement": "Austral/Ewert in-kind technical contribution = USD 5,988,435",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "Rev2 line-item classification; detailed serial/condition schedule still to evidence before APPROVED valuation"
+    },
+    {
+      "statement": "Panthers cash uses before operating working capital = USD 5,151,093",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "Rev2 management estimate including PR2 8¼, infrastructure, workshop, office/IT, vehicles, import/surety and pre-op"
+    },
+    {
+      "statement": "DSO90 Target Liquid Capacity = USD 6,307,993",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "Rev2 timing, Temporary Admission, 65% customs factor, 2% surety and 2 active-front bridge case"
+    },
+    {
+      "statement": "Bridge revenue at default 1,800 ft intermediate / 4,400 ft lateral = USD 574,543 per well",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "USD600k full-service anchor less intermediate resistivity proxy; section lengths adjustable"
+    },
+    {
+      "statement": "Full-service revenue begins M7",
+      "classification": "PRESENT_WITH_CAVEAT",
+      "basis": "PR2 8¼ 50% M0 / 50% M6 procurement and commissioning timing assumption"
+    },
+    {
+      "statement": "65% customs value factor",
+      "classification": "INTERNAL_ONLY",
+      "basis": "reported Ewert practice; formal customs/legal validation pending"
+    },
+    {
+      "statement": "Leasing 18M/24M economics",
+      "classification": "BLOCKED",
+      "basis": "commercial terms pending external provider"
+    },
+    {
+      "statement": "Growth beyond supplier-backed 3F",
+      "classification": "BLOCKED",
+      "basis": "Rev1 3→10 gross-purchase curve superseded for management base; partner-contribution scaling not yet rebuilt"
+    },
+    {
+      "statement": "Rev1 Ramp Gross Peak Funding DSO90 = USD 22,960,556",
+      "classification": "SUPERSEDED",
+      "basis": "old zero-contribution gross-purchase model; not current management case"
+    },
+    {
+      "statement": "Rev1 3F MODEL_DERIVED equipment = USD 10,283,636",
+      "classification": "SUPERSEDED",
+      "basis": "replaced by supplier-backed 3F Required Base USD9,410,762"
+    }
+  ]
+}
