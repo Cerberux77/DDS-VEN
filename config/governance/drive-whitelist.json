@@ -1,6 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "rootDriveFolderId": "19zkHitGjxFPMypQCkTk4JultUlDiT3No",
+  "rebaseFolderId": "1sL7cbKiTtaUi6UXKsoYhVgwQ3kqxst3N",
   "records": [
     {
       "driveFileId": "1XJnE5PLEW8jAdJejq2K3UaGZVV59TDjh6ZAJX82rEzo",
@@ -17,14 +18,26 @@
     {
       "driveFileId": "1fIxd_817m3KMGE892IQd4lqg-hQodsme",
       "canonicalPath": "/05_Modelo_Financiero_y_Reuniones_Fase_2/DDS_Modelo_AC_BLIND.xlsx",
-      "version": "baseline-observed-2026-10-01",
-      "modifiedTime": "2026-10-01T08:53:40.185Z",
+      "version": "current-observed-2026-10-02-s04-integrated",
+      "modifiedTime": "2026-10-02T15:06:19.192Z",
       "hash": null,
       "documentType": "FINANCIAL_MODEL_XLSX",
       "status": "CURRENT",
       "gitPolicy": "DO_NOT_COPY",
       "relatedModelInput": "DDS_FINANCIAL_MODEL_24M",
       "relatedRelease": "DDS_PHASE_2"
+    },
+    {
+      "driveFileId": "1VHFm24wpt3NXpw9e10oCxrPZOSFJpGY2",
+      "canonicalPath": "/05_Modelo_Financiero_y_Reuniones_Fase_2/DDS_Modelo_AC_BLIND_S04_Scenario_Engine_2026-10-02.xlsx",
+      "version": "s04-pre-rev1-snapshot",
+      "modifiedTime": "2026-10-02T15:06:27.435Z",
+      "hash": null,
+      "documentType": "S04_EXCEL_SNAPSHOT",
+      "status": "APPROVED",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_SCENARIO_ENGINE",
+      "relatedRelease": null
     },
     {
       "driveFileId": "1DvzaNgcCziA349smoo3kOuoxRNtMZyd4",
@@ -51,6 +64,90 @@
       "relatedRelease": "DDS_PHASE_2"
     },
     {
+      "driveFileId": "1O53IiybqYo7P7n138CcxJEG79yqLA1fu",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/02_S02_EWERT_AFE_ASSET_GAP_LEASING/DDS Minimum Equipment_ 2 Jobs_Rev0.xlsx",
+      "version": "Rev0",
+      "modifiedTime": "2026-10-03T05:29:20.735Z",
+      "hash": null,
+      "documentType": "AFE_2F_SUPPLIER_SOURCE",
+      "status": "CURRENT",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_EQUIPMENT_2F",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "10jEXZx_7Gf36LVgW_C6ED9zoRUtvmcjc",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/02_S02_EWERT_AFE_ASSET_GAP_LEASING/DDS Equipment_ 3 Jobs_Rev0.xlsx",
+      "version": "Rev0",
+      "modifiedTime": "2026-10-03T05:29:37.845Z",
+      "hash": null,
+      "documentType": "AFE_3F_SUPPLIER_SOURCE",
+      "status": "CANDIDATE",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_EQUIPMENT_3F",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1Yl4drlyNex8Vq91xnT4WpGOpc0xp4Rh8",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/02_S02_EWERT_AFE_ASSET_GAP_LEASING/DDS_S02_Rev0_AFE_Asset_Gap_Leasing_CANDIDATE_2026-10-02.xlsx",
+      "version": "S02-Rev0",
+      "modifiedTime": "2026-10-02T22:37:31.124Z",
+      "hash": null,
+      "documentType": "S02_NORMALIZED_AFE",
+      "status": "CANDIDATE",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_EQUIPMENT_2F",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1wNgF8dFn6XV67hbLzTBPzhvn_UNA34P3",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/03_S03_FINANCIAL_MODEL_24M_REBASE/DDS_S03_Rev1_Reconciliation_Report_CANDIDATE_2026-10-02.md",
+      "version": "S03-Rev1",
+      "modifiedTime": "2026-10-02T23:30:49.161Z",
+      "hash": null,
+      "documentType": "S03_RECONCILIATION_REPORT",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": "DDS_FINANCIAL_MODEL_24M",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1MKOm9Unay6CDSoFh6oMgIk1DW4AXK7vZ",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/04_S04_SCENARIO_ENGINE_EXCEL_SELECTOR/DDS_S04_Rev1_S05_Machine_Handoff_CANDIDATE_2026-10-03.zip",
+      "version": "S04-Rev1",
+      "modifiedTime": "2026-10-03T04:58:10.611Z",
+      "hash": null,
+      "documentType": "S04_MACHINE_HANDOFF",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": "DDS_SCENARIO_ENGINE",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1GL0O14W6Z8_5wRyzinaf5lMMxSn5ltBLQO9myjCguI8",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/05_S05_HTML_VISUAL_FLEET_CONFIGURATOR/DDS_S05_Rev1_S06_Handoff_CANDIDATE_2026-10-03",
+      "version": "S05-Rev1",
+      "modifiedTime": "2026-10-03T05:19:37.154Z",
+      "hash": null,
+      "documentType": "S05_S06_HANDOFF",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": "DDS_S05_UI",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1v_NghLbqeV1gMsNLuEhV2TzyUpmwsG_8wbStTi7Adwc",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/00_INDICE_NAVEGABLE_ECONOMICAL_TECNICAL_REBASE",
+      "version": "pre-rev1-2026-10-02",
+      "modifiedTime": "2026-10-02T15:28:17.989Z",
+      "hash": null,
+      "documentType": "REBASE_INDEX_PRE_REV1",
+      "status": "SUPERSEDED",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    },
+    {
       "driveFileId": "1c9sjUG7a-SVo4ZYI3kPbZ3X6hZkx7Fsy",
       "canonicalPath": "/SMSMantis/manual de identidad mantis/SMSMantis_Manual_Identidad_Grafito_Naranja_v1.0.pdf",
       "version": "1.0",
@@ -65,7 +162,9 @@
   ],
   "notes": [
     "Whitelist is intentionally narrow; folder membership alone does not authorize ingestion.",
-    "A null hash means the connected Drive surface did not expose a content checksum during this observed snapshot.",
-    "Original confidential/legal/commercial source files remain in Drive unless an explicit policy authorizes a normalized or derived Git artifact."
+    "CANDIDATE and BLOCKED_EXTERNAL cannot silently replace CURRENT.",
+    "A null hash means the connected Drive surface did not expose a content checksum during the observed snapshot.",
+    "Supplier and confidential originals remain in Drive; Git stores metadata/normalized/derived governance artifacts only.",
+    "New 3F supplier AFE is CANDIDATE and opens G12; it does not mutate current S03/S04/S05 controls automatically."
   ]
 }
