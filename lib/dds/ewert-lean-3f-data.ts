@@ -1,4 +1,4 @@
-import type { FleetAssetFamily, FrontView, PoolView } from "./scenario-types";
+import type { FleetAssetFamily, FrontView, PoolView } from "./scenario-types.ts";
 
 const sharedNotes = ["3F supplier-backed AFE Rev0.", "Shared directional core can be reused between 12¼ and 8½ phases; diameter-specific mechanical/LWD packages remain distinct."];
 
