@@ -12,16 +12,16 @@ export default async function FleetPage() {
       <nav className="toolbar" aria-label="Navegación de Deal Room">
         <Link className="ghostButton" href="/deal-room">← Deal Room</Link>
         <div className="breadcrumbs">
-          <Link href="/deal-room">Deal Room</Link><span>/</span><strong>Fleet Configurator Rev1</strong>
+          <Link href="/deal-room">Deal Room</Link><span>/</span><strong>Fleet Configurator Rev2</strong>
         </div>
       </nav>
 
       <section className="hero fleetHero">
-        <div className="eyebrow">DDS VENEZUELA · AFE-BACKED / SCENARIO-DRIVEN · {session.email}</div>
-        <h1>DDS Visual Fleet Configurator Rev1</h1>
-        <p>Presentation and interaction layer over the S01/S02 physical architecture and the S04 Rev1 machine-readable scenario handoff.</p>
+        <div className="eyebrow">DDS VENEZUELA · 3F-CAPABLE / PARTNER-CONTRIBUTION / LIQUIDITY-DRIVEN · {session.email}</div>
+        <h1>DDS Visual Fleet Configurator Rev2</h1>
+        <p>Presentation and interaction layer over the Ewert 3 Jobs AFE, partner contribution structure and the S04 Rev2 server-side liquidity engine.</p>
         <div className="notice">
-          <strong>No second economic engine.</strong> Headline economics are exact S04 handoff snapshots. Unresolved selector combinations are shown as pending rather than recalculated in S05.
+          <strong>Single canonical server engine.</strong> The browser only renders S04 Rev2 results. The base case is 3F-capable / 2F-active, with Ewert/Austral in-kind tools and Panthers cash focused on PR2 8¼, infrastructure, workshop, office/IT, vehicles, import and working capital.
         </div>
       </section>
 
