@@ -24,7 +24,7 @@
     "hash": { "type": ["string", "null"] },
     "documentType": { "type": "string", "minLength": 1 },
     "status": {
-      "enum": ["CURRENT", "APPROVED", "DRAFT", "SUPERSEDED", "ARCHIVE"]
+      "enum": ["CURRENT", "APPROVED", "CANDIDATE", "DRAFT", "BLOCKED_EXTERNAL", "SUPERSEDED", "ARCHIVE"]
     },
     "gitPolicy": {
       "enum": ["METADATA_ONLY", "NORMALIZED_INPUT", "DERIVED_ARTIFACT", "DO_NOT_COPY"]
