@@ -242,6 +242,54 @@
       "gitPolicy": "METADATA_ONLY",
       "relatedModelInput": "DDS_S05_UI",
       "relatedRelease": null
+    },
+    {
+      "driveFileId": "1u3QgOwjAAfIaYH1CBOT6M1YD4XLeB7t7IbH-6B57qj8",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/06_S06_ORESHNIK_DRIVE_GITHUB_GMAIL_GOVERNANCE/DDS_Governance_Rev2_Control_Package_CANDIDATE_2026-10-03",
+      "version": "S06-Rev2",
+      "modifiedTime": "2026-10-03T08:04:30.253Z",
+      "hash": null,
+      "documentType": "S06_REV2_GOVERNANCE_PACKAGE",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1DaaRDydAk0-ZlFPFChb0r10eMYxBf8SZ5loiSbB2r9o",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/07_FOLLOW_UP_AND_GATES/07_OPEN_GATES_REGISTER_REV2_CANDIDATE_2026-10-03",
+      "version": "S06-Rev2",
+      "modifiedTime": "2026-10-03T08:04:36.480Z",
+      "hash": null,
+      "documentType": "OPEN_GATES_REGISTER_REV2",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1uj30yVQcMoY-xfxW4867kLLWS9K-12CRymFXBYeyQZs",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/00_INDICE_NAVEGABLE_ECONOMICAL_TECNICAL_REBASE_REV2_CANDIDATE_2026-10-03",
+      "version": "Rev2",
+      "modifiedTime": "2026-10-03T08:04:42.617Z",
+      "hash": null,
+      "documentType": "REBASE_INDEX_REV2",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1ut-7i9nKFaKSnqXYNcsVFGtetbwXGZRsUvwnoRFZsfM",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/06_S06_ORESHNIK_DRIVE_GITHUB_GMAIL_GOVERNANCE/S06_REV2_TRANSVERSAL_AUDIT_INPUT_PACK_CANDIDATE_2026-10-03",
+      "version": "S06-Rev2",
+      "modifiedTime": "2026-10-03T08:04:49.279Z",
+      "hash": null,
+      "documentType": "TRANSVERSAL_AUDIT_INPUT_PACK_REV2",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
     }
   ],
   "notes": [
