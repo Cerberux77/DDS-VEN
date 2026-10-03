@@ -33,3 +33,16 @@ See:
 - `docs/governance/OPERATING_MANUAL.md`
 - `config/governance/drive-whitelist.json`
 - `schemas/governance/`
+
+
+## Rev1 rebase governance
+
+The governed economic/technical path is:
+
+`supplier/Drive source → S02 normalization → S01 technical rules → S03 financial computation → S04 scenario engine → S05 presentation → QA → Manuel gate → release`.
+
+The current repository topology remains a single `Cerberux77/DDS-VEN` application repository containing both computational and presentation domains. A separate deal-room repository is not part of Rev1.
+
+A newer supplier source never mutates S03/S04/S05 by recency alone. The 2026-10-03 3F Rev0 AFE is a CANDIDATE under G12 and must traverse normalization/reconciliation before any downstream update.
+
+PR #7's S05 architecture section must be composed with this document only after PR #6 is approved and merged. The deliberate procedure is recorded in `docs/governance/ARCHITECTURE_MERGE_PLAN.md`.
