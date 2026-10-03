@@ -114,11 +114,34 @@
       "pr": 6,
       "sourceStatus": "CONTROL_PLANE_DELTA",
       "lifecycle": "CANDIDATE",
-      "qaStatus": "PENDING_REV1_CI",
+      "qaStatus": "CI_RUN_52_SUCCESS",
       "approvalState": "DRAFT_NOT_MERGED",
       "openGates": [
         "MANUEL_MERGE_APPROVAL"
-      ]
+      ],
+      "driveArtifacts": [
+        {
+          "name": "DDS Governance Rev1 Release Control Package",
+          "driveFileId": "1NUeprqe69umdxSCTlqCo1Bf8Fjc9scQniirK9CAqaWI",
+          "lifecycle": "CANDIDATE"
+        },
+        {
+          "name": "Open Gates Register Rev1",
+          "driveFileId": "19MZo2QSwLmpH1AMKB_8aZtDxAlfVVnIdnihIT__t4aQ",
+          "lifecycle": "CANDIDATE"
+        },
+        {
+          "name": "Rebase Navigable Index Rev1",
+          "driveFileId": "1TpZOPdP2jEJsZ1jM8xtUOu7A8ouLrzPIbWqREquKEkM",
+          "lifecycle": "CANDIDATE"
+        },
+        {
+          "name": "Final Transversal Audit Input Pack",
+          "driveFileId": "1_oRZVcnHxuGnGyerdaUZli6AoH670Z8zLqZb7SjqwX4",
+          "lifecycle": "CANDIDATE"
+        }
+      ],
+      "gitHeadAtDrivePersistence": "2589735ac5503dce56f97330e8133cf5ea2f21d7"
     }
   ],
   "sourcePractices": [
