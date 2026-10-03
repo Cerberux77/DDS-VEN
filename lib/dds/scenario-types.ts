@@ -125,12 +125,19 @@ export type RampMilestone = {
   sourceStatus: "MODEL_DERIVED";
 };
 
+export type ConceptualBhaComponent = {
+  name: string;
+  sourceStatus: "CONCEPTUAL_INCLUDED_NOT_SEPARATELY_PRICED";
+  note: string;
+};
+
 export type PhysicalView = {
   mode: "EWERT_LEAN_2F" | "PROJECTED" | "CONCEPTUAL";
   sourceStatus: "AFE_BACKED" | "MODEL_DERIVED";
   fronts: FrontView[];
   pools: PoolView[];
   assetFamilies: FleetAssetFamily[];
+  conceptualBhaComponents: ConceptualBhaComponent[];
   conceptualSummary?: {
     fronts: number;
     mainPerDiameter: number;
