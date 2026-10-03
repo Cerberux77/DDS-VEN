@@ -1,0 +1,66 @@
+{
+  "project": "DDS Venezuela",
+  "sprint": "S05",
+  "version": "DDS Visual Fleet Configurator Rev1 — AFE-Backed / Scenario-Driven",
+  "lifecycle": "CANDIDATE",
+  "date": "2026-10-03",
+  "authorities": {
+    "physical": [
+      "S01 DDS Equipment Architecture v2.1",
+      "S02 AFE normalized Asset Register / 2F Base"
+    ],
+    "economics": [
+      "S04 Rev1 S05 Machine Handoff CANDIDATE 2026-10-03"
+    ]
+  },
+  "routes": {
+    "ui": "/deal-room/fleet",
+    "api": "POST /api/dds/scenario"
+  },
+  "economicAuthority": "LOOKUP_ONLY_NO_SECOND_ENGINE",
+  "resolvedCoreScenarios": [
+    "STATIC_2F|EWERT_LEAN|PURCHASE|DSO45",
+    "STATIC_2F|EWERT_LEAN|PURCHASE|DSO60",
+    "STATIC_2F|EWERT_LEAN|PURCHASE|DSO90",
+    "STATIC_3F|EWERT_LEAN|PURCHASE|DSO45",
+    "STATIC_3F|EWERT_LEAN|PURCHASE|DSO60",
+    "STATIC_3F|EWERT_LEAN|PURCHASE|DSO90",
+    "RAMP_3_TO_10|EWERT_LEAN|PURCHASE|DSO45",
+    "RAMP_3_TO_10|EWERT_LEAN|PURCHASE|DSO60",
+    "RAMP_3_TO_10|EWERT_LEAN|PURCHASE|DSO90"
+  ],
+  "physicalAnchor": {
+    "scenario": "STATIC_2F|EWERT_LEAN",
+    "source": "AFE_BACKED",
+    "kitRule": "commercial_qty != physical_capacity; never price physical capacity by multiplying KIT unit cost",
+    "crossovers": {
+      "status": "CONCEPTUAL_INCLUDED_NOT_SEPARATELY_PRICED",
+      "quantity": null,
+      "price": null,
+      "asset_id": null
+    }
+  },
+  "openGates": [
+    "PENDING_LEASING",
+    "PENDING_CUSTOMS_FINAL_VALIDATION",
+    "AUSTRAL_CONFIRMED_ASSET_CREDIT_0",
+    "SPARES_CONSUMPTION_REPLENISHMENT",
+    "SUPPORT_INFRASTRUCTURE_SCOPE",
+    "ACCOUNTING_CLASSIFICATION",
+    "CONTRACT_TIMING_RISK",
+    "EXCEL_S04_COMPLETION_PENDING_TOOL_RECOVERY"
+  ],
+  "release": {
+    "pr": 7,
+    "branch": "run/dds-s05-fleet-configurator",
+    "mergeAllowed": false,
+    "productionReleaseAllowed": false
+  },
+  "s06Gate": {
+    "computational_ui_reconciliation": "PASS_WHEN_CI_GREEN",
+    "visual_qa": "PENDING_BROWSER_EVIDENCE",
+    "preview_access": "PENDING_VERIFICATION",
+    "pr_status": "DRAFT",
+    "readiness": "READY_WITH_OPEN_VISUAL_GATE_IF_PREVIEW_REMAINS_PROTECTED"
+  }
+}
