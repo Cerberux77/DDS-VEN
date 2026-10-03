@@ -93,5 +93,11 @@
       "PRODUCTION_BUILD"
     ],
     "vercelStatus": "SUCCESS"
+  },
+  "driveOutputs": {
+    "releaseControlPackage": "1NUeprqe69umdxSCTlqCo1Bf8Fjc9scQniirK9CAqaWI",
+    "openGatesRegister": "19MZo2QSwLmpH1AMKB_8aZtDxAlfVVnIdnihIT__t4aQ",
+    "navigableIndexRev1": "1TpZOPdP2jEJsZ1jM8xtUOu7A8ouLrzPIbWqREquKEkM",
+    "transversalAuditInputPack": "1_oRZVcnHxuGnGyerdaUZli6AoH670Z8zLqZb7SjqwX4"
   }
 }
