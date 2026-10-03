@@ -1,0 +1,111 @@
+{
+  "project": "DDS Venezuela",
+  "sprint": "S05",
+  "version": "DDS Visual Fleet Configurator Rev2 — 3F-Capable / Partner-Contribution / Liquidity-Driven",
+  "lifecycle": "CANDIDATE",
+  "date": "2026-10-03",
+  "authorities": {
+    "physical": [
+      "Ewert DDS Equipment_ 3 Jobs_Rev0.xlsx",
+      "S01/S02 G12 reconciliation"
+    ],
+    "economics": [
+      "DDS Venezuela Rev2 Cash Ramp CANDIDATE 2026-10-03",
+      "S04 Rev2 server-side liquidity engine"
+    ]
+  },
+  "baseScenario": {
+    "installedCapacity": "3F_CAPABLE",
+    "activeRevenueFronts": 2,
+    "thirdFront": "CONTRACT_TRIGGERED / M7 SENSITIVITY",
+    "required3FAFE": 9410762,
+    "australEwertInKindContribution": 5988435,
+    "panthersCashBeforeWorkingCapital": 5151092.505415513,
+    "pr2_8_14_tools": 2481500,
+    "pr2_8_14_payment": "50% M0 / 50% M6",
+    "pr2_6_34": "AUSTRAL_EWERT_IN_KIND_AVAILABLE_AT_STARTUP",
+    "fullResistivityRevenue": "M7+",
+    "optional475": 179603
+  },
+  "dsoControls": {
+    "dso45": {
+      "peakFundingBeforeFloor": 5285982.075880768,
+      "targetLiquidCapacity": 5446178.950880768
+    },
+    "dso60": {
+      "peakFundingBeforeFloor": 5573253.504452197,
+      "targetLiquidCapacity": 5733450.379452197
+    },
+    "dso90": {
+      "peakFundingBeforeFloor": 6147796.361595053,
+      "targetLiquidCapacity": 6307993.236595053
+    }
+  },
+  "wellGeometry": {
+    "defaultIntermediateFt": 1800,
+    "defaultLateralFt": 4400,
+    "sliders": true,
+    "intermediateRange": [
+      1200,
+      5500
+    ],
+    "lateralRange": [
+      3000,
+      6500
+    ],
+    "fullServiceRevenueAtDefault": 600000,
+    "bridgeRevenueAtDefault": 574542.8571428572
+  },
+  "cashRamp": {
+    "peakMonth": "M6",
+    "pr2M0Payment": 1240750,
+    "pr2M6ToolsPayment": 1240750,
+    "pr2M6Peripherals": 339500,
+    "m6LateImportSurety": 103355.05192961676,
+    "warehouse": "60m x 40m / 2400m2 / M1-M3",
+    "vehicles": "4 pickups purchased M2-M4",
+    "forklift": "5t / M2-M3",
+    "chutoBatea": "RENTED_OPEX / 2 ACT PER WELL"
+  },
+  "physicalArchitecture": {
+    "mwd": "2.5 commercial KIT = 5 physical strings = 3 main + 2 backup",
+    "sharedCore": [
+      "MWD",
+      "PWD core",
+      "Gamma"
+    ],
+    "diameterSpecific": [
+      "PWD pressure subs",
+      "PR2 resistivity",
+      "mud motors",
+      "float subs",
+      "jars",
+      "NMDC",
+      "stabilizers",
+      "UBHO"
+    ],
+    "crossovers": "CONCEPTUAL_INCLUDED_NOT_SEPARATELY_PRICED"
+  },
+  "superseded": [
+    "Austral confirmed contribution = 0",
+    "3F MODEL_DERIVED equipment = USD 10,283,636",
+    "Ramp 3→10 Rev1 funding headline = USD 22,960,556 as current management base",
+    "Separate USD200k crusher placeholder"
+  ],
+  "openGates": [
+    "PENDING_LEASING",
+    "PENDING_CUSTOMS_FINAL_VALIDATION",
+    "PACKING_LIST_FINAL",
+    "SPARES_CONSUMPTION_REPLENISHMENT",
+    "ACCOUNTING_CLASSIFICATION",
+    "S03_XLSX_CANONICAL_INTEGRATION",
+    "S04_EXCEL_CANONICAL_INTEGRATION",
+    "VISUAL_QA_VERCEL_SCOPE"
+  ],
+  "release": {
+    "pr": 7,
+    "branch": "run/dds-s05-fleet-configurator",
+    "mergeAllowed": false,
+    "productionReleaseAllowed": false
+  }
+}

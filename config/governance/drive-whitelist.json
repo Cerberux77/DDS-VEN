@@ -206,6 +206,90 @@
       "gitPolicy": "METADATA_ONLY",
       "relatedModelInput": null,
       "relatedRelease": "DDS_GOVERNANCE_REV1"
+    },
+    {
+      "driveFileId": "1aoOqTxbjaXTqk1qYf3f_pDSJVniCS7ct",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/03_S03_FINANCIAL_MODEL_24M_REBASE/DDS_Venezuela_Rev2_Cash_Ramp_CANDIDATE_2026-10-03.xlsx",
+      "version": "S03-Rev2",
+      "modifiedTime": "2026-10-03T08:07:41.975Z",
+      "hash": null,
+      "documentType": "S03_REV2_CASH_RAMP",
+      "status": "CANDIDATE",
+      "gitPolicy": "DO_NOT_COPY",
+      "relatedModelInput": "DDS_FINANCIAL_MODEL_24M",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "17wIEE9pYqVn5q_v2nUAb7CNr0we_i193",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/04_S04_SCENARIO_ENGINE_EXCEL_SELECTOR/DDS_S04_Rev2_DSO_Liquidity_CANDIDATE_2026-10-03.csv",
+      "version": "S04-Rev2",
+      "modifiedTime": "2026-10-03T07:51:17.932Z",
+      "hash": null,
+      "documentType": "S04_REV2_LIQUIDITY_HANDOFF",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": "DDS_SCENARIO_ENGINE",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1OO6UJinbIzKcSNYONmjUaQlRkJNwzZJThZsKJiXZ-PI",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/05_S05_HTML_VISUAL_FLEET_CONFIGURATOR/DDS_S05_Rev2_Implementation_Reconciliation_CANDIDATE_2026-10-03",
+      "version": "S05-Rev2",
+      "modifiedTime": "2026-10-03T08:06:42.302Z",
+      "hash": null,
+      "documentType": "S05_REV2_RECONCILIATION",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": "DDS_S05_UI",
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1u3QgOwjAAfIaYH1CBOT6M1YD4XLeB7t7IbH-6B57qj8",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/06_S06_ORESHNIK_DRIVE_GITHUB_GMAIL_GOVERNANCE/DDS_Governance_Rev2_Control_Package_CANDIDATE_2026-10-03",
+      "version": "S06-Rev2",
+      "modifiedTime": "2026-10-03T08:04:30.253Z",
+      "hash": null,
+      "documentType": "S06_REV2_GOVERNANCE_PACKAGE",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1DaaRDydAk0-ZlFPFChb0r10eMYxBf8SZ5loiSbB2r9o",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/07_FOLLOW_UP_AND_GATES/07_OPEN_GATES_REGISTER_REV2_CANDIDATE_2026-10-03",
+      "version": "S06-Rev2",
+      "modifiedTime": "2026-10-03T08:04:36.480Z",
+      "hash": null,
+      "documentType": "OPEN_GATES_REGISTER_REV2",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1uj30yVQcMoY-xfxW4867kLLWS9K-12CRymFXBYeyQZs",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/00_INDICE_NAVEGABLE_ECONOMICAL_TECNICAL_REBASE_REV2_CANDIDATE_2026-10-03",
+      "version": "Rev2",
+      "modifiedTime": "2026-10-03T08:04:42.617Z",
+      "hash": null,
+      "documentType": "REBASE_INDEX_REV2",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
+    },
+    {
+      "driveFileId": "1ut-7i9nKFaKSnqXYNcsVFGtetbwXGZRsUvwnoRFZsfM",
+      "canonicalPath": "/ECONOMICAL TECNICAL REBASE/06_S06_ORESHNIK_DRIVE_GITHUB_GMAIL_GOVERNANCE/S06_REV2_TRANSVERSAL_AUDIT_INPUT_PACK_CANDIDATE_2026-10-03",
+      "version": "S06-Rev2",
+      "modifiedTime": "2026-10-03T08:04:49.279Z",
+      "hash": null,
+      "documentType": "TRANSVERSAL_AUDIT_INPUT_PACK_REV2",
+      "status": "CANDIDATE",
+      "gitPolicy": "METADATA_ONLY",
+      "relatedModelInput": null,
+      "relatedRelease": null
     }
   ],
   "notes": [
@@ -213,6 +297,8 @@
     "CANDIDATE and BLOCKED_EXTERNAL cannot silently replace CURRENT.",
     "A null hash means the connected Drive surface did not expose a content checksum during the observed snapshot.",
     "Supplier and confidential originals remain in Drive; Git stores metadata/normalized/derived governance artifacts only.",
-    "New 3F supplier AFE is CANDIDATE and opens G12; it does not mutate current S03/S04/S05 controls automatically."
+    "New 3F supplier AFE is CANDIDATE and opens G12; it does not mutate current S03/S04/S05 controls automatically.",
+    "Rev2 partner-contribution/liquidity artifacts are CANDIDATE; CURRENT files remain unchanged until Manuel promotion gate.",
+    "G12 supplier 3F AFE has been reconciled into Rev2 candidate outputs; growth beyond 3F remains unresolved."
   ]
 }

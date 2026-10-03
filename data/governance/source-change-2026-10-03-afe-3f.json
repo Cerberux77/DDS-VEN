@@ -11,26 +11,32 @@
   "lifecycle": "CANDIDATE",
   "sourceStatus": "SUPPLIER_BACKED",
   "whatChanged": [
-    "Supplier provided a 3 simultaneous jobs Rev0 AFE after S04/S05 current candidate handoffs.",
-    "Supplier email states three simultaneous jobs with backups kept in nearby locations.",
+    "Supplier provided a 3 simultaneous jobs Rev0 AFE.",
     "AFE gross with resistivity is USD 9,590,365.",
     "Optional 4¾ capability totals USD 179,603; required 3F base excluding it is USD 9,410,762.",
-    "Current S04 3F equipment control is USD 10,283,636 MODEL_DERIVED; supplier candidate is USD 872,874 lower."
+    "Rev2 classifies USD 5,988,435 as Austral/Ewert in-kind technical contribution and USD 3,422,327 of AFE line items as Panthers cash-funded.",
+    "PR2 8¼ tools are Panthers-funded 50% M0 / 50% M6; PR2 6¾ tools are Ewert/Austral contribution available for startup.",
+    "Current management base is 3F-capable / 2F-active with full 12¼ resistivity revenue from M7.",
+    "Rev1 model-derived 3F USD 10,283,636 and Ramp USD 22,960,556 headline are superseded for the current management base."
   ],
-  "financialImpact": "RECALCULATION_REQUIRED",
+  "financialImpact": "RECALCULATION_COMPLETED_CANDIDATE",
   "affectedOutputs": [
-    "S02 3F normalized asset register",
-    "S03 STATIC_3F",
-    "S03/S04 RAMP scaling",
-    "S04 scenario handoff",
-    "S05 3F/ramp views"
+    "S03 Rev2 cash-ramp workbook",
+    "S04 Rev2 partner/liquidity engine",
+    "S05 Rev2 fleet configurator",
+    "governance release matrix"
   ],
-  "tests": [],
+  "tests": [
+    "PR #7 Rev2 automated CI required before promotion"
+  ],
   "approver": null,
   "release": null,
   "evidence": [
-    "source persisted in S02 Drive folder",
-    "NO_BASELINE_PROMOTION",
-    "G12 opened"
+    "supplier 3F Rev0 source persisted in S02 Drive folder",
+    "DDS_Venezuela_Rev2_Cash_Ramp_CANDIDATE_2026-10-03.xlsx",
+    "DDS_S04_Rev2_DSO_Liquidity_CANDIDATE_2026-10-03.csv",
+    "DDS_S05_Rev2_Implementation_Reconciliation_CANDIDATE_2026-10-03",
+    "NO_CURRENT_PROMOTION",
+    "G12=RECONCILED_CANDIDATE"
   ]
 }

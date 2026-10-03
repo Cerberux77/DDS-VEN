@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 2,
+  "version": "DDS Governance Rev2 — 3F-Capable Partner Contribution / Liquidity Candidate",
+  "lifecycle": "CANDIDATE",
+  "communicationState": "INTERNAL_MANAGEMENT_DRAFT",
+  "canonicalEconomicControls": {
+    "AFE_3F_GROSS": 9590365,
+    "OPTIONAL_4_75": 179603,
+    "REQUIRED_3F_BASE": 9410762,
+    "AUSTRAL_EWERT_IN_KIND": 5988435,
+    "PANTHERS_CASH_BEFORE_OPERATING_WC": 5151092.505415513,
+    "PR2_8_14_TOOLS": 2481500,
+    "PR2_8_14_M0_PAYMENT": 1240750,
+    "PR2_8_14_M6_TOOLS_PAYMENT": 1240750,
+    "PR2_8_14_M6_PERIPHERALS": 339500,
+    "BRIDGE_REVENUE_PER_WELL_DEFAULT": 574542.8571428572,
+    "FULL_REVENUE_PER_WELL_DEFAULT": 600000,
+    "PEAK_BEFORE_FLOOR_DSO45": 5285982.075880768,
+    "TARGET_LIQUID_DSO45": 5446178.950880768,
+    "PEAK_BEFORE_FLOOR_DSO60": 5573253.504452197,
+    "TARGET_LIQUID_DSO60": 5733450.379452197,
+    "PEAK_BEFORE_FLOOR_DSO90": 6147796.361595053,
+    "TARGET_LIQUID_DSO90": 6307993.236595053,
+    "LIQUIDITY_FLOOR": 160196.875,
+    "PEAK_MONTH": "M6",
+    "BASE_2F_ACTIVE_FCF_24M_DSO90": -1560188.6415294288,
+    "THIRD_FRONT_M7_FCF_24M_DSO90": 708734.1963969427
+  },
+  "locks": {
+    "LIH_BASIS_LOCK": "NBV",
+    "LIH_DESFASE_WITHOUT_EVENT": 78000,
+    "LIH_LIQUIDITY_EFFECT_WITHOUT_EVENT": 0,
+    "PEAK_LIQUID_FUNDING_LABEL": "PEAK LIQUID FUNDING REQUIREMENT",
+    "prohibitedFundingLabels": [
+      "Required Equity",
+      "Equity Raise Required"
+    ],
+    "AUSTRAL_ASSET_WORDING": "Austral/Ewert in-kind contribution = USD 5,988,435 under the Rev2 line-item classification.",
+    "HYDROCARBON_BENEFIT_DEFAULT": "OFF",
+    "GROWTH_BEYOND_3F_STATUS": "PENDING_S04_RESOLUTION"
+  },
+  "operatingBase": {
+    "installedCapacity": "3F_CAPABLE",
+    "activeRevenueFrontsAtStartup": 2,
+    "thirdFront": "CONTRACT_TRIGGERED / M7_SENSITIVITY",
+    "operationsStart": "M4 / 2027-02",
+    "bridgePeriod": "M4-M6",
+    "fullResistivityRevenueStart": "M7",
+    "intermediateFtDefault": 1800,
+    "lateralFtDefault": 4400,
+    "warehouseMeters": "60x40",
+    "warehouseAreaM2": 2400,
+    "chutoBateaTreatment": "RENTAL_OPEX"
+  },
+  "workingAssumptions": {
+    "customsMode": "TEMPORARY_ADMISSION",
+    "customsValueFactor": 0.65,
+    "customsStatus": "PENDING_CUSTOMS_VALIDATION",
+    "suretyRange": [
+      0.01,
+      0.03
+    ],
+    "suretyP50": 0.02,
+    "leasingStatus": "PENDING_EXTERNAL",
+    "purchaseStatus": "ACTIONABLE_MANAGEMENT_DRAFT"
+  },
+  "supersededManagementControls": {
+    "3F_EQUIPMENT_PROJECTED": 10283636,
+    "RAMP_PEAK_DSO90": 22960556.247195095,
+    "RAMP_TARGET_DSO90": 23134273.434695095,
+    "AUSTRAL_ASSET_CREDIT": 0,
+    "status": "SUPERSEDED_FOR_CURRENT_MANAGEMENT_BASE"
+  },
+  "supplier3FReconciliation": {
+    "grossWithResistivity": 9590365,
+    "requiredBaseExcludingOptional475": 9410762,
+    "priorModelDerived3F": 10283636,
+    "deltaVsPriorModelDerived": -872874,
+    "status": "RECONCILED_CANDIDATE",
+    "financialImpact": "RECALCULATION_COMPLETED_CANDIDATE"
+  }
+}
