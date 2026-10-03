@@ -180,6 +180,14 @@ function benchmark2F(dso: ScenarioSelection["dso"]): EconomicSnapshot {
   return rowToEconomics(row);
 }
 
+const CONCEPTUAL_BHA_COMPONENTS = [
+  {
+    name: "Crossovers",
+    sourceStatus: "CONCEPTUAL_INCLUDED_NOT_SEPARATELY_PRICED" as const,
+    note: "S01 BHA composition component. No separate AFE Rev0 line item was identified; quantity, price and asset_id are intentionally not invented."
+  }
+];
+
 function projectedFronts(count: number): FrontView[] {
   return Array.from({ length: count }, (_, index) => ({
     front: index + 1,
@@ -207,6 +215,7 @@ function physicalView(selection: ScenarioSelection): FleetScenario["physical"] {
         fronts: EWERT_LEAN_2F_FRONTS,
         pools: EWERT_LEAN_2F_POOLS,
         assetFamilies: EWERT_LEAN_2F_ASSET_FAMILIES,
+        conceptualBhaComponents: CONCEPTUAL_BHA_COMPONENTS,
         rampMilestones: S04_RAMP_MILESTONES,
         note: "Supplier-backed 2F physical anchor. Commercial KIT quantity and physical capacity are intentionally separated."
       };
@@ -219,6 +228,7 @@ function physicalView(selection: ScenarioSelection): FleetScenario["physical"] {
         fronts: projectedFronts(3),
         pools: EWERT_LEAN_2F_POOLS,
         assetFamilies: EWERT_LEAN_2F_ASSET_FAMILIES,
+        conceptualBhaComponents: CONCEPTUAL_BHA_COMPONENTS,
         rampMilestones: S04_RAMP_MILESTONES,
         note: "3F is MODEL DERIVED and not a supplier quote. Asset drilldown remains the 2F AFE-backed anchor; no line-item 3F AFE is fabricated."
       };
@@ -230,6 +240,7 @@ function physicalView(selection: ScenarioSelection): FleetScenario["physical"] {
       fronts: [],
       pools: EWERT_LEAN_2F_POOLS,
       assetFamilies: EWERT_LEAN_2F_ASSET_FAMILIES,
+      conceptualBhaComponents: CONCEPTUAL_BHA_COMPONENTS,
       rampMilestones: S04_RAMP_MILESTONES,
       note: "Ramp 3→10 is a management/model-derived capacity path. Detailed asset cards remain the 2F AFE-backed anchor."
     };
@@ -244,6 +255,7 @@ function physicalView(selection: ScenarioSelection): FleetScenario["physical"] {
     fronts: [],
     pools: [],
     assetFamilies: [],
+    conceptualBhaComponents: CONCEPTUAL_BHA_COMPONENTS,
     conceptualSummary: {
       fronts,
       mainPerDiameter,
